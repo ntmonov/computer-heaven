@@ -1,41 +1,34 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import logo from '../../images/navbar.png'
 
 function Navbar () {
   return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
       <img src={logo} style={imgStyle} alt='logo' />
-      <a className='navbar-brand' href='#'>Navbar</a>
+      <NavLink className='navbar-brand' to='/home'>Computer Heaven</NavLink>
       <div className='collapse navbar-collapse' id='navbarSupportedContent'>
         <ul className='navbar-nav mr-auto'>
           <li className='nav-item'>
-            <a className='nav-link' href='#'>Home</a>
+            <NavLink className='nav-link' to='/home'>Home</NavLink>
           </li>
           <li className='nav-item'>
-            <a className='nav-link' href='#'>Register</a>
+            <NavLink className='nav-link' to='/register'>Register</NavLink>
           </li>
           <li className='nav-item'>
-            <a className='nav-link' href='#'>Login</a>
+            <NavLink className='nav-link' to='/login'>Login</NavLink>
           </li>
           <li className='nav-item'>
-            <a className='nav-link' href='#'>Logout</a>
-          </li>
-          <li className='nav-item dropdown'>
-            <a className='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-               Catalog
-            </a>
-            <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
-              <a className='dropdown-item' href='#'>Mainboards</a>
-              <a className='dropdown-item' href='#'>CPU</a>
-              <a className='dropdown-item' href='#'>Video Cards</a>
-              <a className='dropdown-item' href='#'>SSD</a>
-            </div>
+            <NavLink className='nav-link' to='/logout'>Logout</NavLink>
           </li>
           <li className='nav-item'>
-            <a className='nav-link' href='#'>Crreate</a>
+            <NavLink className='nav-link' to='/catalog'>Catalog</NavLink>
+          </li>
+          <li className='nav-item'>
+            <NavLink className='nav-link' to='/create'>Crreate</NavLink>
           </li>
           <span className='navbar-text float: right' >
-            Welcome niki
+            Welcome {window.sessionStorage.getItem('username')}
           </span>
         </ul>
       </div>
