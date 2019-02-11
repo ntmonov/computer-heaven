@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import './App.css'
 import HomePage from './components/home/homePage'
+import Navbar from './components/common/Navbar';
 
 class App extends Component {
   render () {
     return (
-      <HomePage />
+      <React.Fragment>
+        <Navbar />
+        <HomePage />
+      </React.Fragment>
     )
   }
 }
