@@ -47,6 +47,7 @@ async function logout() {
       'Content-Type': 'application/json',
       'Authorization': credentials
     }
-  });}
+  })
+}
 
 export { register, login, assignRole, logout }
