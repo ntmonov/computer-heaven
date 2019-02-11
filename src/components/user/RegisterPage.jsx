@@ -2,6 +2,7 @@ import React from 'react'
 import RegisterForm from '../forms/RegisterForm'
 import { register, assignRole } from '../../utils/authRequests.js'
 import { saveSession } from '../../utils/auth.js'
+import toastr from 'toastr'
 
 class RegisterPage extends React.Component {
   constructor (props) {
@@ -38,10 +39,17 @@ class RegisterPage extends React.Component {
     if (!this.validateUser(this.state.user)) {
       return
     }
-    let user = await register(this.state.user)
-    let roleResponse = await assignRole(user._id)
-    user['roleId'] = roleResponse.roleId
-    saveSession(user)
+    let user
+    try {
+      user = await register(this.state.user)
+      let roleResponse = await assignRole(user._id)
+      user['roleId'] = roleResponse.roleId
+      saveSession(user)
+    } catch (e) {
+      toastr.error(user.description)
+      return
+    }
+    toastr.success('Register successful')
     this.props.history.push('/home')
   }
 
