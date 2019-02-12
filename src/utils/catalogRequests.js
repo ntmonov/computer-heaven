@@ -14,4 +14,17 @@ async function create (type, data) {
   return response.json()
 }
 
-export { create }
+async function getCatalog (type) {
+  const credentials = 'Kinvey ' + window.sessionStorage.getItem('authToken')
+
+  const response = await window.fetch(`${BASE_URL}appdata/${APP_KEY}/${type}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': credentials
+    }
+  })
+  return response.json()
+}
+
+export { create, getCatalog }

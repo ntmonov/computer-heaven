@@ -13,6 +13,7 @@ class CreateMainboard extends React.Component {
         socket: '1151',
         memorySupported: 'DDR4',
         description: '',
+        imageUrl: '',
         price: ''
       },
       isLoading: false
@@ -31,6 +32,11 @@ class CreateMainboard extends React.Component {
 
   async onSubmit (event) {
     event.preventDefault()
+    if (this.state.mainboard.imageUrl.length === 0) {
+      let mainboard = this.state.mainboard
+      mainboard.imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
+      this.setState({ mainboard })
+    }
     let item
     try {
       this.setState({ isLoading: true })

@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from '../../images/navbar.png'
+import { isAuth, isAdmin } from '../../utils/auth.js'
 
 function Navbar () {
   return (
@@ -12,21 +13,21 @@ function Navbar () {
           <li className='nav-item'>
             <NavLink className='nav-link' to='/home'>Home</NavLink>
           </li>
-          <li className='nav-item'>
+          {!isAuth() && <li className='nav-item'>
             <NavLink className='nav-link' to='/register'>Register</NavLink>
-          </li>
-          <li className='nav-item'>
+          </li>}
+          {!isAuth() && <li className='nav-item'>
             <NavLink className='nav-link' to='/login'>Login</NavLink>
-          </li>
-          <li className='nav-item'>
+          </li>}
+          {isAuth() && <li className='nav-item'>
             <NavLink className='nav-link' to='/logout'>Logout</NavLink>
-          </li>
-          <li className='nav-item'>
+          </li>}
+          {isAuth() && <li className='nav-item'>
             <NavLink className='nav-link' to='/catalog'>Catalog</NavLink>
-          </li>
-          <li className='nav-item'>
+          </li>}
+          {isAdmin() && <li className='nav-item'>
             <NavLink className='nav-link' to='/create'>Crreate</NavLink>
-          </li>
+          </li>}
           <span className='navbar-text float: right' >
             Welcome {window.sessionStorage.getItem('username')}
           </span>

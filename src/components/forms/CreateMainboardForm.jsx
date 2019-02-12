@@ -40,6 +40,14 @@ function CreateMainboardForm (props) {
       />
 
       <Input
+        name='imageUrl'
+        type='text'
+        id='imageUrl'
+        onChange={props.onChange}
+        value={props.mb.imageUrl}
+      />
+
+      <Input
         name='price'
         type='number'
         id='price'

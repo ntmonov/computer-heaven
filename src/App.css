@@ -6,3 +6,10 @@
     margin: 0 auto;
     width: 100px;
   }
+
+.cardWrapper {
+    display: inline-block;
+    padding: 10px;
+    margin: 15px;
+    width: 250px;
+}
