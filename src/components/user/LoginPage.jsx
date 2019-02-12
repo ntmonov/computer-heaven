@@ -3,6 +3,7 @@ import toastr from 'toastr'
 import LoginForm from '../forms/LoginForm'
 import { login } from '../../utils/authRequests'
 import { saveSession } from '../../utils/auth'
+import Spinner from 'react-spinner-material'
 
 class LoginPage extends React.Component {
   constructor (props) {
@@ -15,7 +16,8 @@ class LoginPage extends React.Component {
       errors: {
         username: '',
         password: ''
-      }
+      },
+      isLoading: false
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -36,6 +38,7 @@ class LoginPage extends React.Component {
     }
     let user
     try {
+      this.setState({ isLoading: true })
       user = await login(this.state.user)
       let roleId = user._kmd.roles[0].roleId
       user.roleId = roleId
@@ -43,8 +46,10 @@ class LoginPage extends React.Component {
       toastr.success('Login successful')
     } catch (error) {
       toastr.error(user.description)
+      this.setState({ isLoading: false })
       return
     }
+    this.setState({ isLoading: false })
     this.props.history.push('/home')
   }
 
@@ -69,6 +74,7 @@ class LoginPage extends React.Component {
     return (
       <React.Fragment>
         <h1>Login Page</h1>
+        {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
         <LoginForm onChange={this.onChange} user={this.state.user} onSubmit={this.onSubmit} errors={this.state.errors} />
       </React.Fragment>
     )

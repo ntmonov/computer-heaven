@@ -3,6 +3,7 @@ import RegisterForm from '../forms/RegisterForm'
 import { register, assignRole } from '../../utils/authRequests.js'
 import { saveSession } from '../../utils/auth.js'
 import toastr from 'toastr'
+import Spinner from 'react-spinner-material'
 
 class RegisterPage extends React.Component {
   constructor (props) {
@@ -20,7 +21,8 @@ class RegisterPage extends React.Component {
         password: '',
         repeatPass: '',
         address: ''
-      }
+      },
+      isLoading: false
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -41,15 +43,18 @@ class RegisterPage extends React.Component {
     }
     let user
     try {
+      this.setState({ isLoading: true })
       user = await register(this.state.user)
       let roleResponse = await assignRole(user._id)
       user['roleId'] = roleResponse.roleId
       saveSession(user)
     } catch (e) {
       toastr.error(user.description)
+      this.setState({ isLoading: false })
       return
     }
     toastr.success('Register successful')
+    this.setState({ isLoading: false })
     this.props.history.push('/home')
   }
 
@@ -83,6 +88,7 @@ class RegisterPage extends React.Component {
     return (
       <React.Fragment>
         <h1>Register Page</h1>
+        {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
         <RegisterForm onChange={this.onChange} user={this.state.user} onSubmit={this.onSubmit} errors={this.state.errors} />
       </React.Fragment>
     )
