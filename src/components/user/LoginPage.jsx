@@ -37,6 +37,8 @@ class LoginPage extends React.Component {
     let user
     try {
       user = await login(this.state.user)
+      let roleId = user._kmd.roles[0].roleId
+      user.roleId = roleId
       saveSession(user)
       toastr.success('Login successful')
     } catch (error) {
