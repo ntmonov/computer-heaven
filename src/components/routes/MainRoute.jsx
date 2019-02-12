@@ -11,6 +11,7 @@ import AdminRoute from './AdminRoute'
 import CatalogPage from '../catalog/CatalogPage'
 import MainboardCatalog from '../catalog/MainboardCatalog'
 import CreateCPU from '../create/CreateCPU'
+import CPUCatalog from '../catalog/CPUCatalog'
 
 function MainRoute () {
   return (
@@ -22,6 +23,7 @@ function MainRoute () {
 
       <PrivateRoute exact path='/catalog' component={CatalogPage} />
       <PrivateRoute path='/catalog/mb' component={MainboardCatalog} />
+      <PrivateRoute path='/catalog/cpu' component={CPUCatalog} />
 
       <AdminRoute exact path='/create' component={CreatePage} />
       <AdminRoute path='/create/mb' component={CreateMainboard} />
