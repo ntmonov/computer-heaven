@@ -26,7 +26,7 @@ function Navbar () {
             <NavLink className='nav-link' to='/catalog'>Catalog</NavLink>
           </li>}
           {isAdmin() && <li className='nav-item'>
-            <NavLink className='nav-link' to='/create'>Crreate</NavLink>
+            <NavLink className='nav-link' to='/create'>Create</NavLink>
           </li>}
           <span className='navbar-text float: right' >
             Welcome {window.sessionStorage.getItem('username')}
