@@ -1,12 +1,14 @@
 import React from 'react'
 import { getCatalog } from '../../utils/catalogRequests'
 import toastr from 'toastr'
+import Spinner from 'react-spinner-material'
 
 class CPUCatalog extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      cpus: []
+      cpus: [],
+      isLoading: false
     }
   }
 
@@ -17,10 +19,13 @@ class CPUCatalog extends React.Component {
   async getData () {
     let cpus
     try {
+      this.setState({ isLoading: true })
       cpus = await getCatalog('cpu')
       this.setState({ cpus })
+      this.setState({ isLoading: false })
     } catch (error) {
       toastr.error(cpus.description)
+      this.setState({ isLoading: false })
     }
   }
 
@@ -28,6 +33,7 @@ class CPUCatalog extends React.Component {
     return (
       <React.Fragment>
         <h1>Catalog</h1>
+        {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
         {this.state.cpus.map(cpu => (
           <div className='cardWrapper'>
             <div className='card-group'>

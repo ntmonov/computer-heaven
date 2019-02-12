@@ -12,6 +12,8 @@ import CatalogPage from '../catalog/CatalogPage'
 import MainboardCatalog from '../catalog/MainboardCatalog'
 import CreateCPU from '../create/CreateCPU'
 import CPUCatalog from '../catalog/CPUCatalog'
+import CreateVideo from '../create/CreateVideo'
+import VideoCatalog from '../catalog/VideoCatalog'
 
 function MainRoute () {
   return (
@@ -24,11 +26,12 @@ function MainRoute () {
       <PrivateRoute exact path='/catalog' component={CatalogPage} />
       <PrivateRoute path='/catalog/mb' component={MainboardCatalog} />
       <PrivateRoute path='/catalog/cpu' component={CPUCatalog} />
+      <PrivateRoute path='/catalog/video' component={VideoCatalog} />
 
       <AdminRoute exact path='/create' component={CreatePage} />
       <AdminRoute path='/create/mb' component={CreateMainboard} />
       <AdminRoute path='/create/cpu' component={CreateCPU} />
-      <AdminRoute path='/create/video' component={CreateMainboard} />
+      <AdminRoute path='/create/video' component={CreateVideo} />
       <AdminRoute path='/create/ssd' component={CreateMainboard} />
 
     </React.Fragment>
