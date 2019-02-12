@@ -1,5 +1,7 @@
 import React from 'react'
 import CreateMainboardForm from '../forms/CreateMainboardForm'
+import { create } from '../../utils/catalogRequests'
+import toastr from 'toastr'
 
 class CreateMainboard extends React.Component {
   constructor (props) {
@@ -25,9 +27,16 @@ class CreateMainboard extends React.Component {
     this.setState({ mainboard })
   }
 
-  onSubmit (event) {
+  async onSubmit (event) {
     event.preventDefault()
-    window.alert(JSON.stringify(this.state.mainboard))
+    let item
+    try {
+      item = await create('mainboard', this.state.mainboard)
+      toastr.success('Mainboard created')
+      this.props.history.push('/home')
+    } catch (error) {
+      toastr.error(item.description)
+    }
   }
 
   render () {
