@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import HomePage from '../home/homePage'
 import RegisterPage from '../user/RegisterPage'
 import LoginPage from '../user/LoginPage'
+import LogoutPage from '../user/LogoutPage'
 
 function MainRoute () {
   return (
@@ -10,6 +11,7 @@ function MainRoute () {
       <Route exact path='/home' component={HomePage} />
       <Route path='/register' component={RegisterPage} />
       <Route path='/login' component={LoginPage} />
+      <Route path='/logout' component={LogoutPage} />
     </React.Fragment>
   )
 }

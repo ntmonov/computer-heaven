@@ -14,7 +14,7 @@ async function register ({ username, password, email, address }) {
   return response.json()
 }
 
-async function login (username, password) {
+async function login ({ username, password }) {
   const response = await window.fetch(`${BASE_URL}user/${APP_KEY}/login`, {
     method: 'POST',
     headers: {
