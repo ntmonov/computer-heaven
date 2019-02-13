@@ -3,37 +3,35 @@ import Input from '../common/inputFields/Input'
 import Select from '../common/inputFields/Select'
 import TextArea from '../common/inputFields/TextArea'
 
-function CreateMainboardForm (props) {
+function CreateSSDForm (props) {
   return (
     <form onSubmit={props.onSubmit}>
       <Input
         name='name'
-        label='Name'
         type='text'
-        value={props.video.name}
+        id='name'
         onChange={props.onChange}
+        value={props.ssd.name}
+      />
+
+      <Input
+        name='capacity'
+        type='number'
+        id='capacity'
+        onChange={props.onChange}
+        value={props.ssd.capacity}
       />
 
       <Select
-        name='memory'
-        label='Memory Capacity'
-        options={['2GB', '4GB', '6GB', '8GB']}
+        name='interface'
+        label='Interface'
+        options={['SATA 6Gb/s', 'M.2 SATA 6Gb/s', 'M.2 NVME']}
         onChange={props.onChange}
-        value={props.video.memory}
+        value={props.ssd.interface}
       />
-
-      <Select
-        name='ports'
-        multi='true'
-        label='Output Ports'
-        options={['VGA', 'DVI', 'HDMI', 'DP']}
-        onChange={props.onChange}
-        value={props.video.ports}
-      />
-
       <TextArea
         name='description'
-        value={props.video.description}
+        value={props.ssd.description}
         onChange={props.onChange}
         label='Description'
       />
@@ -43,7 +41,7 @@ function CreateMainboardForm (props) {
         type='text'
         id='imageUrl'
         onChange={props.onChange}
-        value={props.video.imageUrl}
+        value={props.ssd.imageUrl}
       />
 
       <Input
@@ -51,14 +49,15 @@ function CreateMainboardForm (props) {
         type='number'
         id='price'
         onChange={props.onChange}
-        value={props.video.price}
+        value={props.ssd.price}
       />
 
-      <div className='form-group row'>
-        <input type='submit' className='form-control col-sm-3 offset-sm-4 btn btn-primary' value='Add Video Card' />
+      <div class='form-group row'>
+        <input type='submit' className='form-control col-sm-3 offset-sm-4 btn btn-primary' value='Add SSD' />
       </div>
+
     </form>
   )
 }
 
-export default CreateMainboardForm
+export default CreateSSDForm

@@ -10,7 +10,7 @@ function CatalogPage (props) {
     <React.Fragment>
       <h1>Catalog page</h1>
       <div className='createMenu'>
-        <Link to='/catalog/mb'><img src={mb} /></Link>
+        <Link to='/catalog/mainboard'><img src={mb} /></Link>
         <div className='text-center'>
           <p>Mainboards</p>
         </div>
