@@ -14,6 +14,7 @@ import CreateCPU from '../create/CreateCPU'
 import CPUCatalog from '../catalog/CPUCatalog'
 import CreateVideo from '../create/CreateVideo'
 import VideoCatalog from '../catalog/VideoCatalog'
+import MainboardDetails from '../details/MainboardDetails'
 
 function MainRoute () {
   return (
@@ -33,6 +34,8 @@ function MainRoute () {
       <AdminRoute path='/create/cpu' component={CreateCPU} />
       <AdminRoute path='/create/video' component={CreateVideo} />
       <AdminRoute path='/create/ssd' component={CreateMainboard} />
+
+      <PrivateRoute path='/details/mainboard/:productId' component={MainboardDetails} />
 
     </React.Fragment>
   )
