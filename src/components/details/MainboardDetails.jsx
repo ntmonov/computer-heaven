@@ -24,13 +24,13 @@ class MainboardDetails extends React.Component {
     return (
       <div style={stylesForMainDiv}>
         <h1>MB card</h1>
-        <div class='card mb-3'>
-          <img class='card-img-top' style={styles} src={mb.imageUrl} alt='Card image cap' />
-          <div class='card-body'>
-            <h5 class='card-title'>{mb.name}}</h5>
+        <div className='card mb-3'>
+          <img className='card-img-top' style={styles} src={mb.imageUrl} alt='Card image cap' />
+          <div className='card-body'>
+            <h5 className='card-title'>{mb.name}}</h5>
             <h3>Specfications</h3>
-            <p class='card-text'>Socket: {mb.socket}}</p>
-            <p class='card-text'>Memory supported: {mb.memorySupported}</p>
+            <p className='card-text'>Socket: {mb.socket}}</p>
+            <p className='card-text'>Memory supported: {mb.memorySupported}</p>
             <h3>Description</h3>
             <p>{mb.description}</p>
             <h3>Price: {mb.price}</h3>
