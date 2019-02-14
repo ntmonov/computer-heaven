@@ -23,7 +23,7 @@ import VideoDetails from '../details/VideoDetails'
 import SSDDetails from '../details/SSDDetails'
 import CartPage from '../cart/CartPage'
 
-function MainRoute () {
+function MainRoute (props) {
   return (
     <React.Fragment>
       <Route exact path='/home' component={HomePage} />
@@ -50,7 +50,7 @@ function MainRoute () {
       <AdminRoute path='/edit/video/:productId' component={EditVideo} />
       <AdminRoute path='/edit/ssd/:productId' component={EditSSD} />
 
-      <PrivateRoute path='/cart' component={CartPage} />
+      <PrivateRoute path='/cart' component={() => <CartPage cart={props.cart} />} />
 
     </React.Fragment>
   )
