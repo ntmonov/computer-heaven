@@ -6,7 +6,7 @@ class CartPage extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      cart: []
+      cart: [],
     }
   }
 
@@ -21,7 +21,7 @@ class CartPage extends React.Component {
 
   render () {
     return (
-      <CartList cart={this.state.cart} />
+      <CartList items={this.state.cart} />
     )
   }
 }

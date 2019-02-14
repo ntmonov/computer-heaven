@@ -28,6 +28,9 @@ function Navbar () {
           {isAdmin() && <li className='nav-item'>
             <NavLink className='nav-link' to='/create'>Create</NavLink>
           </li>}
+          {isAuth() && <li className='nav-item'>
+            <NavLink className='nav-link' to='/cart'>Cart</NavLink>
+          </li>}
           <span className='navbar-text float: right' >
             Welcome {window.sessionStorage.getItem('username')}
           </span>

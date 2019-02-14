@@ -21,7 +21,7 @@ import MainboardDetails from '../details/MainboardDetails'
 import CPUDetails from '../details/CPUDetails'
 import VideoDetails from '../details/VideoDetails'
 import SSDDetails from '../details/SSDDetails'
-import CartPage from '../cart/CartPage';
+import CartPage from '../cart/CartPage'
 
 function MainRoute () {
   return (

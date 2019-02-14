@@ -4,6 +4,7 @@ import { addToCart } from '../../utils/cartRequests'
 import toastr from 'toastr'
 import Spinner from 'react-spinner-material'
 import CatalogItem from './CatalogItem'
+import { getProductById } from '../../utils/cartRequests'
 
 class Catalog extends React.Component {
   constructor (props) {
@@ -29,10 +30,10 @@ class Catalog extends React.Component {
   }
 
   async addToCart (productId) {
+    let product = await getProductById(productId, this.state.type)
     let data = {
-      productId,
-      userId: window.sessionStorage.getItem('userId'),
-      type: this.state.type
+      product,
+      userId: window.sessionStorage.getItem('userId')
     }
     await addToCart(data)
     toastr.success('Product added')
@@ -59,7 +60,7 @@ class Catalog extends React.Component {
         <h1>Catalog</h1>
         {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
         {this.state.products.map(prod => (
-          <CatalogItem prod={prod} type={this.state.type} addToCart={() => { this.addToCart(prod._id) }} />
+          <CatalogItem key={prod._id} prod={prod} type={this.state.type} addToCart={() => { this.addToCart(prod._id) }} />
         ))}
       </React.Fragment>
     )
