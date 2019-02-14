@@ -1,5 +1,6 @@
 import React from 'react'
 import { getCatalog, deleteProduct } from '../../utils/catalogRequests'
+import { addToCart } from '../../utils/cartRequests'
 import toastr from 'toastr'
 import Spinner from 'react-spinner-material'
 import CatalogItem from './CatalogItem'
@@ -14,6 +15,7 @@ class Catalog extends React.Component {
     }
     this.delProduct = this.delProduct.bind(this)
     this.getData = this.getData.bind(this)
+    this.addToCart = this.addToCart.bind(this)
   }
 
   componentDidMount () {
@@ -24,6 +26,16 @@ class Catalog extends React.Component {
     let type = this.state.type
     await deleteProduct(productId, type)
     this.getData()
+  }
+
+  async addToCart (productId) {
+    let data = {
+      productId,
+      userId: window.sessionStorage.getItem('userId'),
+      type: this.state.type
+    }
+    await addToCart(data)
+    toastr.success('Product added')
   }
 
   async getData () {
@@ -47,7 +59,7 @@ class Catalog extends React.Component {
         <h1>Catalog</h1>
         {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
         {this.state.products.map(prod => (
-          <CatalogItem prod={prod} type={this.state.type} />
+          <CatalogItem prod={prod} type={this.state.type} addToCart={() => { this.addToCart(prod._id) }} />
         ))}
       </React.Fragment>
     )

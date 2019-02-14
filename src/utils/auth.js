@@ -4,6 +4,7 @@ function saveSession (user) {
   window.sessionStorage.setItem('username', user.username)
   window.sessionStorage.setItem('authToken', user._kmd.authtoken)
   window.sessionStorage.setItem('roleId', user.roleId)
+  window.sessionStorage.setItem('userId', user._id)
 }
 
 function isAuth () {
