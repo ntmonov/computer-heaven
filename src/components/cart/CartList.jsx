@@ -32,22 +32,47 @@ class CartList extends React.Component {
   }
 
   async getCPU () {
-    let CPU = await getAllProducts('cpu')
+    let CPUInCart = await getAllProducts('cpu')
+    let CPU = []
+    for (let c of CPUInCart) {
+      let id = c.productId
+      let cpu = await getProductById(id, 'cpu')
+      CPU.push(cpu)
+    }
     this.setState({ CPU })
   }
 
   async getVideo () {
-    let Video = await getAllProducts('video')
+    let VideoInCart = await getAllProducts('video')
+    let Video = []
+    for (let v of VideoInCart) {
+      let id = v.productId
+      let video = await getProductById(id, 'video')
+      Video.push(video)
+    }
     this.setState({ Video })
   }
 
   async getSSD () {
-    let SSD = await getAllProducts('ssd')
+    let SSDInCart = await getAllProducts('ssd')
+    let SSD = []
+    for (let s of SSDInCart) {
+      let id = s.productId
+      let ssd = await getProductById(id, 'ssd')
+      SSD.push(ssd)
+    }
     this.setState({ SSD })
   }
 
   render () {
-    return <CartItem items={this.state.mainboards} />
+    return (
+      <React.Fragment>
+        <CartItem items={this.state.mainboards} />
+        <CartItem items={this.state.CPU} />
+        <CartItem items={this.state.Video} />
+        <CartItem items={this.state.SSD} />
+      </React.Fragment>
+    )
   }
 }
 
