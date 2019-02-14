@@ -37,6 +37,7 @@ class Catalog extends React.Component {
     }
     await addToCart(data)
     toastr.success('Product added')
+    this.props.history.push('/home')
   }
 
   async getData () {

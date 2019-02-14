@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import logo from '../../images/navbar.png'
 import { isAuth, isAdmin } from '../../utils/auth.js'
 
-function Navbar () {
+function Navbar (props) {
   return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
       <img src={logo} style={imgStyle} alt='logo' />
@@ -31,9 +31,12 @@ function Navbar () {
           {isAuth() && <li className='nav-item'>
             <NavLink className='nav-link' to='/cart'>Cart</NavLink>
           </li>}
-          <span className='navbar-text float: right' >
+          {isAuth() && <span className='navbar-text float: right' >
             Welcome {window.sessionStorage.getItem('username')}
-          </span>
+          </span>}
+          {isAuth() && <span className='navbar-text float: right' >
+            Cart: {props.itemsLength} items | Total: {props.total}
+          </span>}
         </ul>
       </div>
     </nav>
