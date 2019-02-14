@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { getCatalog, deleteProduct } from '../../utils/catalogRequests'
 import toastr from 'toastr'
 import Spinner from 'react-spinner-material'
+import CatalogItem from './CatalogItem'
 
 class Catalog extends React.Component {
   constructor (props) {
@@ -47,20 +47,7 @@ class Catalog extends React.Component {
         <h1>Catalog</h1>
         {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
         {this.state.products.map(prod => (
-          <div key={prod._id} className='cardWrapper'>
-            <div className='card-group'>
-              <div className='card bg-primary text-black'>
-                <img className='card-img-top' src={prod.imageUrl} style={styles} alt='Card image cap' />
-                <div className='card-body'>
-                  <h5 className='card-title'>{prod.name}</h5>
-                  <p className='card-text'>Price: {prod.price}</p>
-                </div>
-              </div>
-            </div>
-            <Link to={'/details/' + this.state.type + '/' + prod._id}>Details</Link>
-            <Link to={'/edit/' + this.state.type + '/' + prod._id}>Edit</Link>
-            <button onClick={() => this.delProduct(prod._id)}>Delete</button>
-          </div>
+          <CatalogItem prod={prod} type={this.state.type} />
         ))}
       </React.Fragment>
     )
@@ -68,8 +55,3 @@ class Catalog extends React.Component {
 }
 
 export default Catalog
-
-const styles = {
-  width: '128px',
-  height: '128px'
-}
