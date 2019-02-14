@@ -21,6 +21,7 @@ import MainboardDetails from '../details/MainboardDetails'
 import CPUDetails from '../details/CPUDetails'
 import VideoDetails from '../details/VideoDetails'
 import SSDDetails from '../details/SSDDetails'
+import CartPage from '../cart/CartPage';
 
 function MainRoute () {
   return (
@@ -48,6 +49,8 @@ function MainRoute () {
       <AdminRoute path='/edit/cpu/:productId' component={EditCPU} />
       <AdminRoute path='/edit/video/:productId' component={EditVideo} />
       <AdminRoute path='/edit/ssd/:productId' component={EditSSD} />
+
+      <PrivateRoute path='/cart' component={CartPage} />
 
     </React.Fragment>
   )
