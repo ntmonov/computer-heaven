@@ -3,20 +3,22 @@ import './App.css'
 import Navbar from './components/common/Navbar'
 import MainRoute from './components/routes/MainRoute'
 import { getCart } from '../src/utils/cartRequests'
-import { isAuth } from './utils/auth';
+import { isAuth } from './utils/auth'
 
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      cart: [],
-      total: 0
+      cart: []
     }
     this.getCart = this.getCart.bind(this)
-    // this.getTotal = this.getTotal.bind(this)
   }
 
   componentDidMount () {
+    this.getCart()
+  }
+
+  componentDidUpdate () {
     this.getCart()
   }
 
@@ -28,18 +30,10 @@ class App extends Component {
     this.setState({ cart })
   }
 
-  // getTotal () {
-  //   let total = 0
-  //   for (let item of this.state.cart) {
-  //     total += +item.product.price
-  //   }
-  //   return total
-  // }
-
   render () {
     return (
       <React.Fragment>
-        <Navbar itemsLength={this.state.cart.length} total={this.state.total} />
+        <Navbar itemsLength={this.state.cart.length} />
         <MainRoute cart={this.state.cart} />
       </React.Fragment>
     )
