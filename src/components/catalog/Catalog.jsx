@@ -1,10 +1,9 @@
 import React from 'react'
 import { getCatalog, deleteProduct } from '../../utils/catalogRequests'
-import { addToCart } from '../../utils/cartRequests'
+import { addToCart, getProductById } from '../../utils/cartRequests'
 import toastr from 'toastr'
 import Spinner from 'react-spinner-material'
 import CatalogItem from './CatalogItem'
-import { getProductById } from '../../utils/cartRequests'
 
 class Catalog extends React.Component {
   constructor (props) {

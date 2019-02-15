@@ -12,6 +12,7 @@ class App extends Component {
       cart: []
     }
     this.getCart = this.getCart.bind(this)
+    this.getTotal = this.getTotal.bind(this)
   }
 
   componentDidMount () {
@@ -20,6 +21,14 @@ class App extends Component {
 
   componentDidUpdate () {
     this.getCart()
+  }
+
+  getTotal () {
+    let total = 0
+    for (let prod of this.state.cart) {
+      total += +prod.product.price
+    }
+    return total
   }
 
   async getCart () {
@@ -33,7 +42,7 @@ class App extends Component {
   render () {
     return (
       <React.Fragment>
-        <Navbar itemsLength={this.state.cart.length} />
+        <Navbar itemsLength={this.state.cart.length} total={this.getTotal()} />
         <MainRoute cart={this.state.cart} />
       </React.Fragment>
     )

@@ -35,7 +35,7 @@ function Navbar (props) {
             Welcome {window.sessionStorage.getItem('username')}
           </span>}
           {isAuth() && <span className='navbar-text float: right' >
-            Cart: {props.itemsLength} items | Total:
+            Cart: {props.itemsLength} items | Total: {props.total}
           </span>}
         </ul>
       </div>
