@@ -19,10 +19,6 @@ class App extends Component {
     this.getCart()
   }
 
-  componentDidUpdate () {
-    this.getCart()
-  }
-
   getTotal () {
     let total = 0
     for (let prod of this.state.cart) {
