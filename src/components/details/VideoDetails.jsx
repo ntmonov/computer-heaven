@@ -1,5 +1,6 @@
 import React from 'react'
 import { getDetails } from '../../utils/catalogRequests'
+import CommentsForm from '../comments/CommentsForm'
 
 class VideoDetails extends React.Component {
   constructor (props) {
@@ -36,6 +37,7 @@ class VideoDetails extends React.Component {
             <h3>Price: {video.price}</h3>
           </div>
         </div>
+        <CommentsForm type='video' productId={this.props.match.params.productId} />
       </div>
     )
   }
