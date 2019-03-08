@@ -28,7 +28,7 @@ function MainRoute (props) {
     <React.Fragment>
       <Route exact path='/home' component={HomePage} />
       <Route path='/register' component={RegisterPage} />
-      <Route path='/login' component={LoginPage} />
+      <Route path='/login' component={() => <LoginPage getUserId={props.getUserId} />} />
       <PrivateRoute path='/logout' component={LogoutPage} />
 
       <PrivateRoute exact path='/catalog' component={CatalogPage} />

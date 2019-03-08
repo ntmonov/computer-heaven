@@ -13,10 +13,7 @@ class App extends Component {
     }
     this.getCart = this.getCart.bind(this)
     this.getTotal = this.getTotal.bind(this)
-  }
-
-  componentDidMount () {
-    this.getCart()
+    this.setUserId = this.setUserId.bind(this)
   }
 
   getTotal () {
@@ -27,11 +24,15 @@ class App extends Component {
     return total
   }
 
-  async getCart () {
+  setUserId (id) {
+    this.getCart(id)
+  }
+
+  async getCart (userId) {
     if (!isAuth()) {
       return
     }
-    let cart = await getCart()
+    let cart = await getCart(userId)
     this.setState({ cart })
   }
 
@@ -39,7 +40,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <Navbar itemsLength={this.state.cart.length} total={this.getTotal()} />
-        <MainRoute cart={this.state.cart} />
+        <MainRoute cart={this.state.cart} getUserId={this.setUserId} />
       </React.Fragment>
     )
   }

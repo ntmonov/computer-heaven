@@ -4,6 +4,7 @@ import LoginForm from '../forms/LoginForm'
 import { login } from '../../utils/authRequests'
 import { saveSession } from '../../utils/auth'
 import Spinner from 'react-spinner-material'
+import { withRouter } from 'react-router-dom'
 
 class LoginPage extends React.Component {
   constructor (props) {
@@ -43,11 +44,11 @@ class LoginPage extends React.Component {
       let roleId = user._kmd.roles[0].roleId
       user.roleId = roleId
       saveSession(user)
+      this.props.getUserId(user._id)
       toastr.success('Login successful')
     } catch (error) {
       toastr.error(user.description)
       this.setState({ isLoading: false })
-      return
     }
     this.setState({ isLoading: false })
     this.props.history.push('/home')
@@ -81,4 +82,4 @@ class LoginPage extends React.Component {
   }
 }
 
-export default LoginPage
+export default withRouter(LoginPage)

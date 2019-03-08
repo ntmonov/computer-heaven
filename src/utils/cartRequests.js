@@ -14,9 +14,9 @@ async function addToCart (data) {
   return response.json()
 }
 
-async function getCart () {
+async function getCart (userId) {
   const credentials = 'Kinvey ' + window.sessionStorage.getItem('authToken')
-  let userId = window.sessionStorage.getItem('userId')
+  // let userId = window.sessionStorage.getItem('userId')
   const response = await window.fetch(`${BASE_URL}appdata/${APP_KEY}/cart/?query={"userId":"${userId}"}`, {
     method: 'GET',
     headers: {
