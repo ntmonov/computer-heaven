@@ -15,10 +15,11 @@ async function create (type, data) {
   return response.json()
 }
 
-async function getCatalog (type) {
+async function getCatalog (type, sortMethod) {
   const credentials = 'Kinvey ' + window.sessionStorage.getItem('authToken')
+  const sort = (sortMethod === 'ASC') ? '1' : '-1'
 
-  const response = await window.fetch(`${BASE_URL}appdata/${APP_KEY}/${type}`, {
+  const response = await window.fetch(`${BASE_URL}appdata/${APP_KEY}/${type}?sort={"price": ${sort}}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

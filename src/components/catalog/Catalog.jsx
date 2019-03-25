@@ -12,7 +12,8 @@ class Catalog extends React.Component {
     this.state = {
       products: [],
       type: '',
-      isLoading: false
+      isLoading: false,
+      sortMethod: 'ASC'
     }
     this.delProduct = this.delProduct.bind(this)
     this.getData = this.getData.bind(this)
@@ -25,14 +26,11 @@ class Catalog extends React.Component {
   }
 
   sortProducts (event) {
-    let type = event.target.value
-    let products = this.state.products
-    if (type === 'ASC') {
-      products.sort((a, b) => a.price - b.price)
-    } else {
-      products.sort((a, b) => b.price - a.price)
-    }
-    this.setState({ products })
+    event.preventDefault()
+    const sortMethod = event.target.value
+    this.setState({ sortMethod }, () => {
+      this.getData()
+    })
   }
 
   async delProduct (productId) {
@@ -59,7 +57,7 @@ class Catalog extends React.Component {
     this.setState({ type })
     try {
       this.setState({ isLoading: true })
-      products = await getCatalog(type)
+      products = await getCatalog(type, this.state.sortMethod)
       this.setState({ products })
       this.setState({ isLoading: false })
     } catch (error) {

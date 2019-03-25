@@ -59,10 +59,11 @@ class CommentsForm extends React.Component {
           </div>
           {this.state.comments.map(comment => (
 
-            <div className='card text-white bg-primary mb-3' style={{ width: '18rem' }}>
+            <div key={comment._id} className='card text-white bg-primary mb-3' style={{ width: '18rem' }}>
               <div className='card-body'>
                 <h5 className='card-title'>by {comment.author}</h5>
                 <p className='card-text'>{comment.text}</p>
+                <p className='card-text' style={{ fontStyle: 'italic' }}>posted on {new Date(comment._kmd.ect).toLocaleDateString()}</p>
               </div>
             </div>
 
