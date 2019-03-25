@@ -2,7 +2,7 @@ import React from 'react'
 import TextArea from '../common/inputFields/TextArea'
 import { leaveComment } from '../../utils/commentRequests.js'
 import toastr from 'toastr'
-import CommentsSection from './CommentsSection'
+import { getComments } from '../../utils/commentRequests'
 
 class CommentsForm extends React.Component {
   constructor (props) {
@@ -13,11 +13,17 @@ class CommentsForm extends React.Component {
         type: this.props.type,
         productId: this.props.productId,
         text: ''
-      }
+      },
+      comments: []
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
+
+  componentDidMount () {
+    this.getData()
+  }
+
   onChange (event) {
     let value = event.target.value
     let comment = this.state.comment
@@ -29,6 +35,12 @@ class CommentsForm extends React.Component {
     event.preventDefault()
     await leaveComment(this.state.comment)
     toastr.success('Comment added')
+    this.getData()
+  }
+
+  async getData () {
+    let comments = await getComments('type', this.props.productId)
+    this.setState({ comments })
   }
 
   render () {
@@ -47,8 +59,14 @@ class CommentsForm extends React.Component {
           </div>
 
         </form>
-        <CommentsSection type={this.props.type} productId={this.props.productId} comment={this.state.comment} />
-      </React.Fragment>
+        {this.state.comments.map(comment => (
+          <div style={{ border: '2px solid black' }}>
+            <div key={comment._id}>
+              <p>{comment.text}</p>
+              <span>by {comment.author}</span>
+            </div>
+          </div>
+        ))}      </React.Fragment>
     )
   }
 }
