@@ -57,16 +57,18 @@ class CommentsForm extends React.Component {
           <div className='form-group row'>
             <input type='submit' className='form-control col-sm-3 offset-sm-4 btn btn-primary' value='Comment' />
           </div>
+          {this.state.comments.map(comment => (
 
-        </form>
-        {this.state.comments.map(comment => (
-          <div style={{ border: '2px solid black' }}>
-            <div key={comment._id}>
-              <p>{comment.text}</p>
-              <span>by {comment.author}</span>
+            <div className='card text-white bg-primary mb-3' style={{ width: '18rem' }}>
+              <div className='card-body'>
+                <h5 className='card-title'>by {comment.author}</h5>
+                <p className='card-text'>{comment.text}</p>
+              </div>
             </div>
-          </div>
-        ))}      </React.Fragment>
+
+          ))}
+        </form>
+      </React.Fragment>
     )
   }
 }
