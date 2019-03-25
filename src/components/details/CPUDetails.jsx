@@ -2,7 +2,7 @@ import React from 'react'
 import { getDetails } from '../../utils/catalogRequests'
 import CommentsForm from '../comments/CommentsForm'
 
-class MainboardDetails extends React.Component {
+class CPUDetails extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -43,7 +43,7 @@ class MainboardDetails extends React.Component {
   }
 }
 
-export default MainboardDetails
+export default CPUDetails
 
 const styles = {
   width: '384px'

@@ -1,4 +1,5 @@
 import { BASE_URL, APP_KEY } from './config'
+import { delComments } from './commentRequests'
 
 async function create (type, data) {
   const credentials = 'Kinvey ' + window.sessionStorage.getItem('authToken')
@@ -48,6 +49,7 @@ async function deleteProduct (productId, type) {
       'Authorization': credentials
     }
   })
+  await delComments(type, productId)
   return response.json()
 }
 

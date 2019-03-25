@@ -27,4 +27,17 @@ async function getComments (type, productId) {
   return response.json()
 }
 
-export { leaveComment, getComments }
+async function delComments (type, productId) {
+  const credentials = 'Kinvey ' + window.sessionStorage.getItem('authToken')
+
+  const response = await window.fetch(`${BASE_URL}appdata/${APP_KEY}/comments/?query={"productId":"${productId}"}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': credentials
+    }
+  })
+  return response.json()
+}
+
+export { leaveComment, getComments, delComments }

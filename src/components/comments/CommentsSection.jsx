@@ -9,7 +9,19 @@ class CommentsSection extends React.Component {
     }
   }
 
-  async componentDidMount () {
+  componentDidMount () {
+    this.getData()
+  }
+
+  static getDerivedStateFromProps (props, state) {
+    if (state.comments[state.comments.indexOf(props.comment)] !== props.comment) {
+      return {
+        comments: [...state.comments, props.comment]
+      }
+    }
+  }
+
+  async getData () {
     let comments = await getComments('type', this.props.productId)
     this.setState({ comments })
   }

@@ -38,6 +38,7 @@ class Catalog extends React.Component {
   async delProduct (productId) {
     let type = this.state.type
     await deleteProduct(productId, type)
+    toastr.success('Item deleted')
     this.getData()
   }
 
@@ -74,7 +75,7 @@ class Catalog extends React.Component {
         <Select options={['-', 'ASC', 'DESC']} label='Sort by Price' multi={false} onChange={this.sortProducts} />
         {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
         {this.state.products.map(prod => (
-          <CatalogItem key={prod._id} prod={prod} type={this.state.type} addToCart={() => { this.addToCart(prod._id) }} />
+          <CatalogItem key={prod._id} delProduct={this.delProduct} prod={prod} type={this.state.type} addToCart={() => { this.addToCart(prod._id) }} />
         ))}
       </React.Fragment>
     )

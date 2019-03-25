@@ -47,7 +47,7 @@ class CommentsForm extends React.Component {
           </div>
 
         </form>
-        <CommentsSection type={this.props.type} productId={this.props.productId} />
+        <CommentsSection type={this.props.type} productId={this.props.productId} comment={this.state.comment} />
       </React.Fragment>
     )
   }
