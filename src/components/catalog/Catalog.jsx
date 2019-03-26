@@ -82,14 +82,18 @@ class Catalog extends React.Component {
     return (
       <React.Fragment>
         <h1>Catalog</h1>
-        <Select options={['-', 'ASC', 'DESC']} label='Sort by Price' multi={false} onChange={this.sortProducts} />
-        {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
-        {this.state.products.map(prod => (
-          <CatalogItem key={prod._id} delProduct={this.delProduct} prod={prod} type={this.state.type} addToCart={() => { this.addToCart(prod._id) }} />
-        ))}
-        <div className='pagination'>
-          {page < (this.state.count / 3) && <Link to={`/catalog/${type}/${page + 1}`} onClick={this.forceUpdate} >Next</Link>} ||
+        <div className='text-center'>
+          <Select options={['-', 'ASC', 'DESC']} label='Sort by Price' multi={false} onChange={this.sortProducts} />
+          {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
+          {this.state.products.map(prod => (
+            <CatalogItem key={prod._id} delProduct={this.delProduct} prod={prod} type={this.state.type} addToCart={() => { this.addToCart(prod._id) }} />
+          ))}
+        </div>
+        <div className='text-center'>
+          {page < (this.state.count / 3) && <Link to={`/catalog/${type}/${page + 1}`} onClick={this.forceUpdate} >Next</Link>}
+          { ' ' }
           {page > 1 && <Link to={`/catalog/${type}/${page - 1}`} onClick={this.forceUpdate} >Prev</Link>}
+          <p>Page {page} of {Math.ceil(this.state.count / 3)}</p>
         </div>
       </React.Fragment>
     )

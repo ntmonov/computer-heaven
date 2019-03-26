@@ -3,14 +3,14 @@ import Input from '../common/inputFields/Input'
 import Select from '../common/inputFields/Select'
 import TextArea from '../common/inputFields/TextArea'
 
-function CreateMainboardForm (props) {
+function CreateVideoForm (props) {
   return (
     <form onSubmit={props.onSubmit}>
       <Input
         name='name'
         label='Name'
         type='text'
-        value={props.video.name}
+        value={props.vc.name}
         onChange={props.onChange}
       />
 
@@ -19,7 +19,7 @@ function CreateMainboardForm (props) {
         label='Memory Capacity'
         options={['2GB', '4GB', '6GB', '8GB']}
         onChange={props.onChange}
-        value={props.video.memory}
+        value={props.vc.memory}
       />
 
       <Select
@@ -28,12 +28,12 @@ function CreateMainboardForm (props) {
         label='Output Ports'
         options={['VGA', 'DVI', 'HDMI', 'DP']}
         onChange={props.onChange}
-        value={props.video.ports}
+        value={props.vc.ports}
       />
 
       <TextArea
         name='description'
-        value={props.video.description}
+        value={props.vc.description}
         onChange={props.onChange}
         label='Description'
       />
@@ -43,7 +43,7 @@ function CreateMainboardForm (props) {
         type='text'
         id='imageUrl'
         onChange={props.onChange}
-        value={props.video.imageUrl}
+        value={props.vc.imageUrl}
       />
 
       <Input
@@ -51,7 +51,7 @@ function CreateMainboardForm (props) {
         type='number'
         id='price'
         onChange={props.onChange}
-        value={props.video.price}
+        value={props.vc.price}
       />
 
       <div className='form-group row'>
@@ -61,4 +61,4 @@ function CreateMainboardForm (props) {
   )
 }
 
-export default CreateMainboardForm
+export default CreateVideoForm
