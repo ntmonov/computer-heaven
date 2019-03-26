@@ -15,11 +15,12 @@ async function create (type, data) {
   return response.json()
 }
 
-async function getCatalog (type, sortMethod) {
+async function getCatalog (type, sortMethod, page) {
   const credentials = 'Kinvey ' + window.sessionStorage.getItem('authToken')
   const sort = (sortMethod === 'ASC') ? '1' : '-1'
+  const skip = (page - 1) * 3
 
-  const response = await window.fetch(`${BASE_URL}appdata/${APP_KEY}/${type}?sort={"price": ${sort}}`, {
+  const response = await window.fetch(`${BASE_URL}appdata/${APP_KEY}/${type}?sort={"price": ${sort}}&limit=3&skip=${skip}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -67,4 +68,16 @@ async function updateProduct (productId, type, data) {
   return response.json()
 }
 
-export { create, getCatalog, getDetails, deleteProduct, updateProduct }
+async function getCount (type) {
+  const credentials = 'Kinvey ' + window.sessionStorage.getItem('authToken')
+  const response = await window.fetch(`${BASE_URL}appdata/${APP_KEY}/${type}/_count`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': credentials
+    }
+  })
+  return response.json()
+}
+
+export { create, getCatalog, getDetails, deleteProduct, updateProduct, getCount }

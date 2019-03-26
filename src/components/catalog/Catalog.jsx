@@ -1,5 +1,6 @@
 import React from 'react'
-import { getCatalog, deleteProduct } from '../../utils/catalogRequests'
+import { Link } from 'react-router-dom'
+import { getCatalog, deleteProduct, getCount } from '../../utils/catalogRequests'
 import { addToCart, getProductById } from '../../utils/cartRequests'
 import toastr from 'toastr'
 import Spinner from 'react-spinner-material'
@@ -13,7 +14,8 @@ class Catalog extends React.Component {
       products: [],
       type: '',
       isLoading: false,
-      sortMethod: 'ASC'
+      sortMethod: window.sessionStorage.getItem('sortMethod') || 'ASC',
+      count: 0
     }
     this.delProduct = this.delProduct.bind(this)
     this.getData = this.getData.bind(this)
@@ -23,6 +25,7 @@ class Catalog extends React.Component {
 
   componentDidMount () {
     this.getData()
+    this.getCount()
   }
 
   sortProducts (event) {
@@ -31,6 +34,7 @@ class Catalog extends React.Component {
     this.setState({ sortMethod }, () => {
       this.getData()
     })
+    window.sessionStorage.setItem('sortMethod', sortMethod)
   }
 
   async delProduct (productId) {
@@ -54,10 +58,11 @@ class Catalog extends React.Component {
   async getData () {
     let products
     let type = this.props.match.params.type
+    let page = Number(this.props.match.params.page)
     this.setState({ type })
     try {
       this.setState({ isLoading: true })
-      products = await getCatalog(type, this.state.sortMethod)
+      products = await getCatalog(type, this.state.sortMethod, page)
       this.setState({ products })
       this.setState({ isLoading: false })
     } catch (error) {
@@ -66,7 +71,14 @@ class Catalog extends React.Component {
     }
   }
 
+  async getCount () {
+    const { count } = await getCount(this.props.match.params.type)
+    this.setState({ count })
+  }
+
   render () {
+    let page = Number(this.props.match.params.page)
+    let type = this.props.match.params.type
     return (
       <React.Fragment>
         <h1>Catalog</h1>
@@ -75,6 +87,10 @@ class Catalog extends React.Component {
         {this.state.products.map(prod => (
           <CatalogItem key={prod._id} delProduct={this.delProduct} prod={prod} type={this.state.type} addToCart={() => { this.addToCart(prod._id) }} />
         ))}
+        <div className='pagination'>
+          {page < (this.state.count / 3) && <Link to={`/catalog/${type}/${page + 1}`} onClick={this.forceUpdate} >Next</Link>} ||
+          {page > 1 && <Link to={`/catalog/${type}/${page - 1}`} onClick={this.forceUpdate} >Prev</Link>}
+        </div>
       </React.Fragment>
     )
   }

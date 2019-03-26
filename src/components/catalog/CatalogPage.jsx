@@ -10,28 +10,28 @@ function CatalogPage (props) {
     <React.Fragment>
       <h1>Catalog page</h1>
       <div className='createMenu'>
-        <Link to='/catalog/mainboard'><img src={mb} /></Link>
+        <Link to='/catalog/mainboard/1'><img src={mb} /></Link>
         <div className='text-center'>
           <p>Mainboards</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/catalog/cpu'><img src={cpu} /></Link>
+        <Link to='/catalog/cpu/1'><img src={cpu} /></Link>
         <div className='text-center'>
           <p>Processors</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/catalog/video'><img src={video} /></Link>
+        <Link to='/catalog/video/1'><img src={video} /></Link>
         <div className='text-center'>
           <p>Video Cards</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/catalog/ssd'><img src={ssd} /></Link>
+        <Link to='/catalog/ssd/1'><img src={ssd} /></Link>
         <div className='text-center'>
           <p>SSD</p>
         </div>

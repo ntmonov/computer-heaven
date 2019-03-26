@@ -32,7 +32,7 @@ function MainRoute (props) {
       <PrivateRoute path='/logout' component={LogoutPage} />
 
       <PrivateRoute exact path='/catalog' component={CatalogPage} />
-      <PrivateRoute path='/catalog/:type' component={Catalog} />
+      <PrivateRoute path='/catalog/:type/:page' component={Catalog} />
 
       <AdminRoute exact path='/create' component={CreatePage} />
       <AdminRoute path='/create/mb' component={CreateMainboard} />
