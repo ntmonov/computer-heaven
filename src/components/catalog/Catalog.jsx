@@ -90,9 +90,9 @@ class Catalog extends React.Component {
           ))}
         </div>
         <div className='text-center'>
-          {page < (this.state.count / 3) && <Link to={`/catalog/${type}/${page + 1}`} onClick={this.forceUpdate} >Next</Link>}
+          {page < (this.state.count / 3) && <Link className='btn btn-primary' to={`/catalog/${type}/${page + 1}`} onClick={this.forceUpdate} >Next</Link>}
           { ' ' }
-          {page > 1 && <Link to={`/catalog/${type}/${page - 1}`} onClick={this.forceUpdate} >Prev</Link>}
+          {page > 1 && <Link className='btn btn-primary' to={`/catalog/${type}/${page - 1}`} onClick={this.forceUpdate} >Prev</Link>}
           <p>Page {page} of {Math.ceil(this.state.count / 3)}</p>
         </div>
       </React.Fragment>
