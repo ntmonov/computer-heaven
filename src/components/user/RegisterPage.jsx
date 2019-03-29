@@ -4,6 +4,7 @@ import { register, assignRole } from '../../utils/authRequests.js'
 import { saveSession } from '../../utils/auth.js'
 import toastr from 'toastr'
 import Spinner from 'react-spinner-material'
+import { CartConsumer } from '../contexts/cart-context'
 
 class RegisterPage extends React.Component {
   constructor (props) {
@@ -55,6 +56,7 @@ class RegisterPage extends React.Component {
     }
     toastr.success('Register successful')
     this.setState({ isLoading: false })
+    this.props.getInitialCart()
     this.props.history.push('/home')
   }
 
@@ -95,4 +97,14 @@ class RegisterPage extends React.Component {
   }
 }
 
-export default RegisterPage
+function RegisterPageWithContext (props) {
+  return (
+    <CartConsumer>
+      {
+        (cart) => <RegisterPage {...props} getInitialCart={cart.getInitialCart} />
+      }
+    </CartConsumer>
+  )
+}
+
+export default RegisterPageWithContext
