@@ -5,6 +5,7 @@ import { login } from '../../utils/authRequests'
 import { saveSession } from '../../utils/auth'
 import Spinner from 'react-spinner-material'
 import { withRouter } from 'react-router-dom'
+import { CartConsumer } from '../contexts/cart-context'
 
 class LoginPage extends React.Component {
   constructor (props) {
@@ -44,13 +45,14 @@ class LoginPage extends React.Component {
       let roleId = user._kmd.roles[0].roleId
       user.roleId = roleId
       saveSession(user)
-      this.props.getUserId(user._id)
       toastr.success('Login successful')
     } catch (error) {
+      console.log(error)
       toastr.error(user.description)
       this.setState({ isLoading: false })
     }
     this.setState({ isLoading: false })
+    this.props.getInitialCart()
     this.props.history.push('/home')
   }
 
@@ -82,4 +84,14 @@ class LoginPage extends React.Component {
   }
 }
 
-export default withRouter(LoginPage)
+function LoginPageWithContext (props) {
+  return (
+    <CartConsumer>
+      {
+        (cart) => <LoginPage {...props} getInitialCart={cart.getInitialCart} />
+      }
+    </CartConsumer>
+  )
+}
+
+export default withRouter(LoginPageWithContext)

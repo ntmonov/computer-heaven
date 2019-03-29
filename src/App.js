@@ -12,17 +12,25 @@ class App extends Component {
     this.state = {
       cart: {
         cart: [],
-        updateCart: this.updateCart.bind(this)
+        updateCart: this.updateCart.bind(this),
+        getInitialCart: this.getInitialCart.bind(this)
       }
     }
   }
 
   async updateCart (data) {
-    let cart = await getCart()
-    console.log(cart)
-    cart.push(data)
-    this.setState({ cart: { cart } })
-    await addToCart(data)
+    let product = await addToCart(data)
+    let { cart } = this.state.cart
+    cart.push(product)
+    this.setState({ cart: { ...this.state.cart, cart } })
+  }
+
+  async getInitialCart () {
+    let initialCart = await getCart()
+    let { cart } = this.state.cart
+    cart = initialCart
+    this.setState({ cart: { ...this.state.cart, cart } })
+
   }
 
   render () {

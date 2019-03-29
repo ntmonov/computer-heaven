@@ -35,9 +35,9 @@ function Navbar (props) {
           {isAuth() && <span className='navbar-text float: right' >
             Welcome {window.sessionStorage.getItem('username')}
           </span>}
-          {/* {isAuth() && <span className='navbar-text float: right' >
-            Cart: {cart.length} items | Total: {props.total.toFixed(2)}
-          </span>} */}
+          {isAuth() && <span className='navbar-text float: right' >
+            Cart: {props.cart.length} items
+          </span>}
         </ul>
       </div>
     </nav>
@@ -48,7 +48,7 @@ function NavbarConsumer (props) {
   return (
     <CartConsumer>
       {
-        (cart) => <Navbar {...props} cart={cart} />
+        (cart) => <Navbar {...props} cart={cart.cart} />
       }
     </CartConsumer>
   )
