@@ -36,12 +36,20 @@ function Navbar (props) {
             Welcome {window.sessionStorage.getItem('username')}
           </span>}
           {isAuth() && <span className='navbar-text float: right' >
-            Cart: {props.cart.length} items
+            Cart: {props.cart.length} items | Total: {getTotal(props.cart)}
           </span>}
         </ul>
       </div>
     </nav>
   )
+}
+
+function getTotal (items) {
+  let sum = 0
+  for (let p of items) {
+    sum += Number(p.product.price)
+  }
+  return sum
 }
 
 function NavbarConsumer (props) {
