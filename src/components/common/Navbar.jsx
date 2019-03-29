@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from '../../images/navbar.png'
 import { isAuth, isAdmin } from '../../utils/auth.js'
+import { CartConsumer } from '../contexts/cart-context'
 
 function Navbar (props) {
   return (
@@ -34,16 +35,26 @@ function Navbar (props) {
           {isAuth() && <span className='navbar-text float: right' >
             Welcome {window.sessionStorage.getItem('username')}
           </span>}
-          {isAuth() && <span className='navbar-text float: right' >
-            Cart: {props.itemsLength} items | Total: {props.total.toFixed(2)}
-          </span>}
+          {/* {isAuth() && <span className='navbar-text float: right' >
+            Cart: {cart.length} items | Total: {props.total.toFixed(2)}
+          </span>} */}
         </ul>
       </div>
     </nav>
   )
 }
 
-export default Navbar
+function NavbarConsumer (props) {
+  return (
+    <CartConsumer>
+      {
+        (cart) => <Navbar {...props} cart={cart} />
+      }
+    </CartConsumer>
+  )
+}
+
+export default NavbarConsumer
 
 const imgStyle = {
   'borderRadius': '50%',

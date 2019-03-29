@@ -6,6 +6,7 @@ import toastr from 'toastr'
 import Spinner from 'react-spinner-material'
 import CatalogItem from './CatalogItem'
 import Select from '../common/inputFields/Select'
+import { CartConsumer } from '../contexts/cart-context'
 
 class Catalog extends React.Component {
   constructor (props) {
@@ -50,7 +51,7 @@ class Catalog extends React.Component {
       product,
       userId: window.sessionStorage.getItem('userId')
     }
-    await addToCart(data)
+    this.props.updateCart(data)
     toastr.success('Product added')
     this.props.history.push('/home')
   }
@@ -100,4 +101,14 @@ class Catalog extends React.Component {
   }
 }
 
-export default Catalog
+function CatalogConsumer (props) {
+  return (
+    <CartConsumer>
+      {
+        (cart) => (<Catalog {...props} updateCart={cart.updateCart} />)
+      }
+    </CartConsumer>
+  )
+} 
+
+export default CatalogConsumer

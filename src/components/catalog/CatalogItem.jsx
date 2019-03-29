@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { isAdmin } from '../../utils/auth'
+import { CartConsumer } from '../contexts/cart-context'
 
 function CatalogItem (props) {
   return (
@@ -24,7 +25,17 @@ function CatalogItem (props) {
   )
 }
 
-export default CatalogItem
+function CatalogItemConsumer (props) {
+  return (
+    <CartConsumer>
+      {
+        (cart) => <CatalogItem {...props} />
+      }
+    </CartConsumer>
+  )
+}
+
+export default CatalogItemConsumer
 
 const styles = {
   width: '128px',
