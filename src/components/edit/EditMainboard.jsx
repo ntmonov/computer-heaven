@@ -55,7 +55,7 @@ class EditMainboard extends React.Component {
 
   render () {
     return (
-      <CreateMainboardForm onChange={this.onChange} mb={this.state.mainboard} onSubmit={this.onSubmit} />
+      <CreateMainboardForm onChange={this.onChange} mb={this.state.mainboard} onSubmit={this.onSubmit} submitMsg='Edit mainboard' />
     )
   }
 }

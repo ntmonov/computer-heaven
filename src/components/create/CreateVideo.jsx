@@ -8,7 +8,7 @@ class CreateVideo extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      vc: {
+      video: {
         name: '',
         memory: '2GB',
         ports: 'VGA',
@@ -25,22 +25,22 @@ class CreateVideo extends React.Component {
   onChange (event) {
     let name = event.target.name
     let value = event.target.value
-    let vc = this.state.vc
-    vc[name] = value
-    this.setState({ vc })
+    let video = this.state.video
+    video[name] = value
+    this.setState({ video })
   }
 
   async onSubmit (event) {
     event.preventDefault()
-    if (this.state.vc.imageUrl.length === 0) {
-      let vc = this.state.vc
-      vc.imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
-      this.setState({ vc })
+    if (this.state.video.imageUrl.length === 0) {
+      let video = this.state.video
+      video.imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
+      this.setState({ video })
     }
     let item
     try {
       this.setState({ isLoading: true })
-      item = await create('video', this.state.vc)
+      item = await create('video', this.state.video)
       toastr.success('Video Card created')
       this.setState({ isLoading: false })
       this.props.history.push('/home')
@@ -54,7 +54,7 @@ class CreateVideo extends React.Component {
     return (
       <React.Fragment>
         {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
-        <CreateVideoForm onChange={this.onChange} vc={this.state.vc} onSubmit={this.onSubmit} />
+        <CreateVideoForm onChange={this.onChange} video={this.state.video} onSubmit={this.onSubmit} submitMsg='Create video card' />
       </React.Fragment>
     )
   }

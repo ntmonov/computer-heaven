@@ -55,7 +55,7 @@ class EditCPU extends React.Component {
 
   render () {
     return (
-      <CreateCPUForm onChange={this.onChange} cpu={this.state.cpu} onSubmit={this.onSubmit} />
+      <CreateCPUForm onChange={this.onChange} cpu={this.state.cpu} onSubmit={this.onSubmit} submitMsg='Edit CPU' />
     )
   }
 }

@@ -54,7 +54,7 @@ class CreateMainboard extends React.Component {
     return (
       <React.Fragment>
         {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
-        <CreateSSDForm onChange={this.onChange} ssd={this.state.ssd} onSubmit={this.onSubmit} />
+        <CreateSSDForm onChange={this.onChange} ssd={this.state.ssd} onSubmit={this.onSubmit} submitMsg='Create SSD' />
       </React.Fragment>
     )
   }

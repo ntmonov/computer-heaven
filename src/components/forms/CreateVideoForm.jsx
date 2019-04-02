@@ -10,7 +10,7 @@ function CreateVideoForm (props) {
         name='name'
         label='Name'
         type='text'
-        value={props.vc.name}
+        value={props.video.name}
         onChange={props.onChange}
       />
 
@@ -19,7 +19,7 @@ function CreateVideoForm (props) {
         label='Memory Capacity'
         options={['2GB', '4GB', '6GB', '8GB']}
         onChange={props.onChange}
-        value={props.vc.memory}
+        value={props.video.memory}
       />
 
       <Select
@@ -28,12 +28,12 @@ function CreateVideoForm (props) {
         label='Output Ports'
         options={['VGA', 'DVI', 'HDMI', 'DP']}
         onChange={props.onChange}
-        value={props.vc.ports}
+        value={props.video.ports}
       />
 
       <TextArea
         name='description'
-        value={props.vc.description}
+        value={props.video.description}
         onChange={props.onChange}
         label='Description'
       />
@@ -43,7 +43,7 @@ function CreateVideoForm (props) {
         type='text'
         id='imageUrl'
         onChange={props.onChange}
-        value={props.vc.imageUrl}
+        value={props.video.imageUrl}
       />
 
       <Input
@@ -51,11 +51,11 @@ function CreateVideoForm (props) {
         type='number'
         id='price'
         onChange={props.onChange}
-        value={props.vc.price}
+        value={props.video.price}
       />
 
       <div className='form-group row'>
-        <input type='submit' className='form-control col-sm-3 offset-sm-4 btn btn-primary' value='Add Video Card' />
+        <input type='submit' className='form-control col-sm-3 offset-sm-4 btn btn-primary' value={props.submitMsg} />
       </div>
     </form>
   )

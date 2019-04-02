@@ -55,7 +55,7 @@ class EditSSD extends React.Component {
 
   render () {
     return (
-      <CreateSSDForm onChange={this.onChange} ssd={this.state.ssd} onSubmit={this.onSubmit} />
+      <CreateSSDForm onChange={this.onChange} ssd={this.state.ssd} onSubmit={this.onSubmit} submitMsg='Edit SSD' />
     )
   }
 }

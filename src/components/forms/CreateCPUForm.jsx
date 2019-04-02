@@ -64,7 +64,7 @@ function CreateCPUForm (props) {
       />
 
       <div class='form-group row'>
-        <input type='submit' className='form-control col-sm-3 offset-sm-4 btn btn-primary' value='Add CPU' />
+        <input type='submit' className='form-control col-sm-3 offset-sm-4 btn btn-primary' value={props.submitMsg} />
       </div>
 
     </form>

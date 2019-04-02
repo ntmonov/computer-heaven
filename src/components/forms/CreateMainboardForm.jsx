@@ -57,7 +57,7 @@ function CreateMainboardForm (props) {
       />
 
       <div className='form-group row'>
-        <input type='submit' className='form-control col-sm-3 offset-sm-4 btn btn-primary' value='Add Mainboard' />
+        <input type='submit' className='form-control col-sm-3 offset-sm-4 btn btn-primary' value={props.submitMsg} />
       </div>
     </form>
   )
