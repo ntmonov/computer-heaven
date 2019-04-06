@@ -17,10 +17,7 @@ import EditCPU from '../edit/EditCPU'
 import EditVideo from '../edit/EditVideo'
 import EditSSD from '../edit/EditSSD'
 import Catalog from '../catalog/Catalog'
-import MainboardDetails from '../details/MainboardDetails'
-import CPUDetails from '../details/CPUDetails'
-import VideoDetails from '../details/VideoDetails'
-import SSDDetails from '../details/SSDDetails'
+import DetailsPage from '../details/DetailsPage'
 import CartPage from '../cart/CartPage'
 
 function MainRoute (props) {
@@ -40,10 +37,7 @@ function MainRoute (props) {
       <AdminRoute path='/create/video' component={CreateVideo} />
       <AdminRoute path='/create/ssd' component={CreateSSD} />
 
-      <PrivateRoute path='/details/mainboard/:productId' component={MainboardDetails} />
-      <PrivateRoute path='/details/cpu/:productId' component={CPUDetails} />
-      <PrivateRoute path='/details/video/:productId' component={VideoDetails} />
-      <PrivateRoute path='/details/ssd/:productId' component={SSDDetails} />
+      <PrivateRoute path='/details/:type/:productId' component={DetailsPage} />
 
       <AdminRoute path='/edit/mainboard/:productId' component={EditMainboard} />
       <AdminRoute path='/edit/cpu/:productId' component={EditCPU} />
