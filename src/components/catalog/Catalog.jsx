@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { getCatalog, deleteProduct, getCount } from '../../utils/catalogRequests'
+import { getCatalog, deleteProduct, getFilteredCatalog, getCount } from '../../utils/catalogRequests'
 import { getProductById } from '../../utils/cartRequests'
 import toastr from 'toastr'
 import Spinner from 'react-spinner-material'
@@ -23,6 +23,8 @@ class Catalog extends React.Component {
     this.getData = this.getData.bind(this)
     this.addToCart = this.addToCart.bind(this)
     this.sortProducts = this.sortProducts.bind(this)
+    this.filterProducts = this.filterProducts.bind(this)
+    this.getCount = this.getCount.bind(this)
   }
 
   componentDidMount () {
@@ -78,13 +80,20 @@ class Catalog extends React.Component {
     this.setState({ count })
   }
 
+  async filterProducts (searchText) {
+    await this.getData()
+    let filterProducts = await getFilteredCatalog(this.state.type, searchText)
+    this.setState({ products: filterProducts, count: 1 })
+    this.props.history.push(`/catalog/${this.state.type}/1`)
+  }
+
   render () {
     let page = Number(this.props.match.params.page)
     let type = this.props.match.params.type
     return (
       <React.Fragment>
         <h1>Catalog</h1>
-        <Search />
+        <Search searchByText={this.filterProducts} />
         <div className='text-center'>
           <Select options={['-', 'ASC', 'DESC']} label='Sort by Price' multi={false} onChange={this.sortProducts} />
           {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}

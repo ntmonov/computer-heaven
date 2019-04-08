@@ -4,10 +4,10 @@ function Search (props) {
   return (
     <div className='row bg-primary m-5'>
       <div className='col-md-3'>
-        <label htmlFor='searchForName'>Search by name/desccription</label>
+        <label htmlFor='searchForName'>Search by name</label>
       </div>
       <div className='col-md-9'>
-        <input type='text' id='searchForName' style={{ width: '60%' }} className='bg-warning' />
+        <input type='text' id='searchForName' style={{ width: '60%' }} className='bg-warning' onChange={(e) => props.searchByText(e.target.value)} />
       </div>
       <div className='col-md-3'>
         <label htmlFor='searchByPrice1'>Minimum price</label>

@@ -80,4 +80,17 @@ async function getCount (type) {
   return response.json()
 }
 
-export { create, getCatalog, getDetails, deleteProduct, updateProduct, getCount }
+async function getFilteredCatalog (type, seacrhText) {
+  const credentials = 'Kinvey ' + window.sessionStorage.getItem('authToken')
+
+  const response = await window.fetch(`${BASE_URL}appdata/${APP_KEY}/${type}?query={"name":{"$regex":"^${seacrhText}" }}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': credentials
+    }
+  })
+  return response.json()
+}
+
+export { create, getCatalog, getDetails, deleteProduct, updateProduct, getCount, getFilteredCatalog }
