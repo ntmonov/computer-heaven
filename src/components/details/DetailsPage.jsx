@@ -29,16 +29,16 @@ class DetailsPage extends React.Component {
 
     return (
       <div style={stylesForMainDiv}>
-        <h1>MB card</h1>
+        <h1>Product card</h1>
         <div className='card mb-3'>
           <img className='card-img-top' style={styles} src={imageUrl} alt='Card image cap' />
           <div className='card-body'>
-            <h5 className='card-title'>{name}}</h5>
-            <h3>Specfications</h3>
-            {list}
+            <h5 className='card-title'>{name}</h5>
             <h3>Description</h3>
             <p>{description}</p>
             <h3>Price: {price}</h3>
+            <h3>Specfications</h3>
+            {list}
           </div>
         </div>
         <CommentsForm type={this.props.type} productId={this.props.match.params.type} />

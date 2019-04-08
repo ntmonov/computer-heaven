@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import Navbar from './components/common/Navbar'
 import MainRoute from './components/routes/MainRoute'
-import { getCart, addToCart } from '../src/utils/cartRequests'
-import { isAuth } from './utils/auth'
+import { getCart, addToCart, updateCartWithQty } from '../src/utils/cartRequests'
 import { CartProvider } from './components/contexts/cart-context'
 
 class App extends Component {
@@ -19,10 +18,23 @@ class App extends Component {
   }
 
   async updateCart (data) {
-    let product = await addToCart(data)
     let { cart } = this.state.cart
-    cart.push(product)
+    let quantity = Number(cart.quantity) || 1
+    let cartId
+    for (let prod of cart) {
+      if (prod.product._id === data.product._id) {
+        quantity++
+      }
+    }
+    data['quantity'] = quantity
+    cart['quantity'] = quantity
+    cart.push(data)
     this.setState({ cart: { ...this.state.cart, cart } })
+    if (quantity > 1) {
+      await updateCartWithQty(data, cartId)
+    } else {
+      await addToCart(data)
+    }
   }
 
   async getInitialCart () {
@@ -30,7 +42,6 @@ class App extends Component {
     let { cart } = this.state.cart
     cart = initialCart
     this.setState({ cart: { ...this.state.cart, cart } })
-
   }
 
   render () {
