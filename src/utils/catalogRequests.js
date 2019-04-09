@@ -80,10 +80,9 @@ async function getCount (type) {
   return response.json()
 }
 
-async function getFilteredCatalog (type, seacrhText) {
+async function getFilteredCatalog (type, seacrhText = '', minPrice = 0, maxPrice = 9999) {
   const credentials = 'Kinvey ' + window.sessionStorage.getItem('authToken')
-
-  const response = await window.fetch(`${BASE_URL}appdata/${APP_KEY}/${type}?query={"name":{"$regex":"^${seacrhText}" }}`, {
+  const response = await window.fetch(`${BASE_URL}appdata/${APP_KEY}/${type}?query={"name":{"$regex":"^${seacrhText}"}}&{"price":{"$gt" : "${minPrice}", "$lt" : "${maxPrice}"}}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

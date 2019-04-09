@@ -17,7 +17,11 @@ class Catalog extends React.Component {
       type: '',
       isLoading: false,
       sortMethod: window.sessionStorage.getItem('sortMethod') || 'ASC',
-      count: 0
+      count: 0,
+      countPerPage: 3,
+      minPrice: 0,
+      maxPrice: 9999,
+      searchText: ''
     }
     this.delProduct = this.delProduct.bind(this)
     this.getData = this.getData.bind(this)
@@ -63,6 +67,7 @@ class Catalog extends React.Component {
     let products
     let type = this.props.match.params.type
     let page = Number(this.props.match.params.page)
+    this.setState({ countPerPage: 3 })
     this.setState({ type })
     try {
       this.setState({ isLoading: true })
@@ -80,11 +85,22 @@ class Catalog extends React.Component {
     this.setState({ count })
   }
 
-  async filterProducts (searchText) {
-    await this.getData()
-    let filterProducts = await getFilteredCatalog(this.state.type, searchText)
-    this.setState({ products: filterProducts, count: 1 })
-    this.props.history.push(`/catalog/${this.state.type}/1`)
+  async filterProducts (id, value) {
+    if (id === 'searchForName') {
+      this.setState({ searchText: value })
+    } else if (id === 'searchByPrice1') {
+      this.setState({ minPrice: Number(value) })
+    } else if (id === 'searchByPrice2') {
+      this.setState({ maxPrice: Number(value) })
+    }
+    let filterProducts = await getFilteredCatalog(this.state.type, this.state.searchText, this.state.minPrice, this.state.maxPrice)
+    let filteredProductsCount = filterProducts.length
+    if (filteredProductsCount > 0) {
+      this.setState({ products: filterProducts, count: filteredProductsCount, countPerPage: filteredProductsCount })
+    } else {
+      await this.getData()
+      await this.getCount()
+    }
   }
 
   render () {
@@ -93,7 +109,7 @@ class Catalog extends React.Component {
     return (
       <React.Fragment>
         <h1>Catalog</h1>
-        <Search searchByText={this.filterProducts} />
+        <Search search={this.filterProducts} />
         <div className='text-center'>
           <Select options={['-', 'ASC', 'DESC']} label='Sort by Price' multi={false} onChange={this.sortProducts} />
           {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
@@ -102,10 +118,10 @@ class Catalog extends React.Component {
           ))}
         </div>
         <div className='text-center'>
-          {page < (this.state.count / 3) && <Link className='btn btn-primary' to={`/catalog/${type}/${page + 1}`} onClick={this.forceUpdate} >Next</Link>}
+          {page < (this.state.count / this.state.countPerPage) && <Link className='btn btn-primary' to={`/catalog/${type}/${page + 1}`} onClick={this.forceUpdate} >Next</Link>}
           { ' ' }
           {page > 1 && <Link className='btn btn-primary' to={`/catalog/${type}/${page - 1}`} onClick={this.forceUpdate} >Prev</Link>}
-          <p>Page {page} of {Math.ceil(this.state.count / 3)}</p>
+          <p>Page {page} of {Math.ceil(this.state.count / this.state.countPerPage)}</p>
         </div>
       </React.Fragment>
     )
@@ -120,6 +136,6 @@ function CatalogConsumer (props) {
       }
     </CartConsumer>
   )
-} 
+}
 
 export default CatalogConsumer

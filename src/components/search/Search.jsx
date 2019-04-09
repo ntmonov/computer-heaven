@@ -7,19 +7,19 @@ function Search (props) {
         <label htmlFor='searchForName'>Search by name</label>
       </div>
       <div className='col-md-9'>
-        <input type='text' id='searchForName' style={{ width: '60%' }} className='bg-warning' onChange={(e) => props.searchByText(e.target.value)} />
+        <input type='text' id='searchForName' style={{ width: '60%' }} className='bg-warning' onChange={(e) => props.search(e.target.id, e.target.value)} />
       </div>
       <div className='col-md-3'>
         <label htmlFor='searchByPrice1'>Minimum price</label>
       </div>
       <div className='col-md-9'>
-        <input type='number' id='searchByPrice1' style={{ width: '20%' }} className='bg-warning' />
+        <input type='number' id='searchByPrice1' style={{ width: '20%' }} className='bg-warning' onChange={(e) => props.search(e.target.id, e.target.value)} />
       </div>
       <div className='col-md-3'>
         <label htmlFor='searchByPrice2'>Minimum price</label>
       </div>
       <div className='col-md-9'>
-        <input type='number' id='searchByPrice2' style={{ width: '20%' }} className='bg-warning' />
+        <input type='number' id='searchByPrice2' style={{ width: '20%' }} className='bg-warning' onChange={(e) => props.search(e.target.id, e.target.value)} />
       </div>
     </div>
   )
