@@ -10,28 +10,28 @@ function CreatePage (props) {
     <React.Fragment>
       <h1>Create page</h1>
       <div className='createMenu'>
-        <Link to='/create/mb'><img src={mb} /></Link>
+        <Link to='/create/mb'><img src={mb} alt={mb} /></Link>
         <div className='text-center'>
           <p>Mainboards</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/create/cpu'><img src={cpu} /></Link>
+        <Link to='/create/cpu'><img src={cpu} alt={cpu} /></Link>
         <div className='text-center'>
           <p>Processors</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/create/video'><img src={video} /></Link>
+        <Link to='/create/video'><img src={video} alt={video} /></Link>
         <div className='text-center'>
           <p>Video Cards</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/create/ssd'><img src={ssd} /></Link>
+        <Link to='/create/ssd'><img src={ssd} alt={ssd} /></Link>
         <div className='text-center'>
           <p>SSD</p>
         </div>

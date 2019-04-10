@@ -9,7 +9,7 @@ function CatalogItem (props) {
       <div key={props.prod._id} className='cardWrapper'>
         <div className='card-group'>
           <div className='card bg-primary text-black'>
-            <img className='card-img-top' src={props.prod.imageUrl} style={styles} alt='Card image cap' />
+            <img className='card-img-top' src={props.prod.imageUrl} style={styles} alt={props.prod.imageUrl} />
             <div className='card-body'>
               <h5 className='card-title'>{props.prod.name}</h5>
               <p className='card-text'>Price: {props.prod.price}</p>

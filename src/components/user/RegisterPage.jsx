@@ -46,6 +46,7 @@ class RegisterPage extends React.Component {
     try {
       this.setState({ isLoading: true })
       user = await register(this.state.user)
+      console.log(user)
       let roleResponse = await assignRole(user._id)
       user['roleId'] = roleResponse.roleId
       saveSession(user)

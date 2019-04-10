@@ -39,7 +39,7 @@ class CommentsForm extends React.Component {
   }
 
   async getData () {
-    let comments = await getComments('type', this.props.productId)
+    let comments = await getComments(this.props.productId)
     this.setState({ comments })
   }
 

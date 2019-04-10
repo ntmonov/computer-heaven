@@ -1,54 +1,22 @@
-import { BASE_URL, APP_KEY, APP_SECRET, MASTER_SECRET, USER_ROLE_ID } from './config'
+import { BASE_URL, APP_KEY, USER_ROLE_ID } from './config'
 import { post, put } from './crud'
 
-const basicCredentials = 'Basic ' + window.btoa(APP_KEY + ':' + APP_SECRET)
-
-async function register ({ username, password, email, address }) {
-  const response = await window.fetch(`${BASE_URL}user/${APP_KEY}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': basicCredentials
-    },
-    body: JSON.stringify({ username, password, address, email })
-  })
-  return response.json()
+function register ({ username, password, email, address }) {
+  const data = { username, password, email, address }
+  return post(`${BASE_URL}user/${APP_KEY}`, 'basic', data)
 }
 
 async function login ({ username, password }) {
-  const response = await window.fetch(`${BASE_URL}user/${APP_KEY}/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': basicCredentials
-    },
-    body: JSON.stringify({ username, password })
-  })
-  return response.json()
+  const data = { username, password }
+  return post(`${BASE_URL}user/${APP_KEY}/login`, 'basic', data)
 }
 
 async function assignRole (userId) {
-  const credentials = 'Basic ' + window.btoa(APP_KEY + ':' + MASTER_SECRET)
-
-  const response = await window.fetch(`${BASE_URL}user/${APP_KEY}/${userId}/roles/${USER_ROLE_ID}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': credentials
-    }
-  })
-  return response.json()
+  return put(`${BASE_URL}user/${APP_KEY}/${userId}/roles/${USER_ROLE_ID}`, 'basic')
 }
 
 async function logout () {
-  const credentials = 'Kinvey ' + window.sessionStorage.getItem('authToken')
-  await window.fetch(`${BASE_URL}user/${APP_KEY}/_logout`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': credentials
-    }
-  })
+  return post(`${BASE_URL}user/${APP_KEY}/_logout`, 'kinvey')
 }
 
 export { register, login, assignRole, logout }

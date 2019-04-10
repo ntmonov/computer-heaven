@@ -47,7 +47,6 @@ class LoginPage extends React.Component {
       saveSession(user)
       toastr.success('Login successful')
     } catch (error) {
-      console.log(error)
       toastr.error(user.description)
       this.setState({ isLoading: false })
     }
