@@ -1,28 +1,23 @@
 import React from 'react'
+import SearchForm from '../forms/SearchForm'
 
-function Search (props) {
-  return (
-    <div className='row bg-primary m-5'>
-      <div className='col-md-3'>
-        <label htmlFor='searchForName'>Search by name</label>
-      </div>
-      <div className='col-md-9'>
-        <input type='text' id='searchForName' style={{ width: '60%' }} className='bg-warning' onChange={(e) => props.search(e.target.id, e.target.value)} />
-      </div>
-      <div className='col-md-3'>
-        <label htmlFor='searchByPrice1'>Minimum price</label>
-      </div>
-      <div className='col-md-9'>
-        <input type='number' id='searchByPrice1' style={{ width: '20%' }} className='bg-warning' onChange={(e) => props.search(e.target.id, e.target.value)} />
-      </div>
-      <div className='col-md-3'>
-        <label htmlFor='searchByPrice2'>Minimum price</label>
-      </div>
-      <div className='col-md-9'>
-        <input type='number' id='searchByPrice2' style={{ width: '20%' }} className='bg-warning' onChange={(e) => props.search(e.target.id, e.target.value)} />
-      </div>
-    </div>
-  )
+class Search extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      search: {
+        searchName: '',
+        minPrice: 0,
+        maxPrice: 9999
+      }
+    }
+  }
+
+  render () {
+    return (
+      <SearchForm search={this.state.search} />
+    )
+  }
 }
 
 export default Search
