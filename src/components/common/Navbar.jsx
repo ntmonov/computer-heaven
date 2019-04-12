@@ -29,6 +29,11 @@ function Navbar (props) {
           {isAdmin() && <li className='nav-item'>
             <NavLink className='nav-link' to='/create'>Create</NavLink>
           </li>}
+
+          {isAuth() && <li className='nav-item'>
+            <NavLink className='nav-link' to='/search'>Search</NavLink>
+          </li>}
+
           {isAuth() && <li className='nav-item'>
             <NavLink className='nav-link' to='/cart'>Cart</NavLink>
           </li>}

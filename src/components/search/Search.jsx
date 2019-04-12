@@ -1,15 +1,24 @@
 import React from 'react'
+import toastr from 'toastr'
 import SearchForm from '../forms/SearchForm'
+import CatalogItem from '../catalog/CatalogItem'
+import Spinner from 'react-spinner-material'
+import { getProductById } from '../../utils/cartRequests'
+import { getSearchCatalog } from '../../utils/searchRequests'
+import { CartConsumer } from '../contexts/cart-context'
 
 class Search extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       search: {
+        type: 'mainboard',
         searchName: '',
         minPrice: 0,
         maxPrice: 9999
-      }
+      },
+      products: [],
+      isLoading: false
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -24,9 +33,20 @@ class Search extends React.Component {
     this.setState({ search })
   }
 
-  onSubmit (event) {
+  async onSubmit (event) {
     event.preventDefault()
-    this.props.onSearch(this.state.search)
+    let products
+    const { type, searchName, minPrice, maxPrice } = this.state.search
+    try {
+      this.setState({ isLoading: true })
+      products = await getSearchCatalog(type, searchName, minPrice, maxPrice)
+      console.log(products)
+      this.setState({ products })
+      this.setState({ isLoading: false })
+    } catch (error) {
+      toastr.error(products.description)
+      this.setState({ isLoading: false })
+    }
   }
 
   onReset (event) {
@@ -34,16 +54,49 @@ class Search extends React.Component {
       search: {
         searchName: '',
         minPrice: 0,
-        maxPrice: 9999
+        maxPrice: 9999,
+        type: 'mainboard'
       }
     })
   }
 
+  async addToCart (productId) {
+    let product = await getProductById(productId, this.state.search.type)
+    let data = {
+      product,
+      userId: window.sessionStorage.getItem('userId')
+    }
+    this.props.updateCart(data)
+    toastr.success('Product added')
+    this.props.history.push('/home')
+  }
+
   render () {
     return (
-      <SearchForm search={this.state.search} onChange={this.onChange} onSubmit={this.onSubmit} onReset={this.props.onReset} />
+      <React.Fragment>
+        <SearchForm search={this.state.search} onChange={this.onChange} onSubmit={this.onSubmit} onReset={this.onReset} />
+
+        <h1 className='text-center'>Search results</h1>
+        <div className='text-center'>
+          {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
+          {this.state.products.map(prod => (
+            <CatalogItem key={prod._id} delProduct={this.delProduct} prod={prod} type={this.state.search.type} addToCart={() => { this.addToCart(prod._id) }} />
+          ))}
+        </div>
+
+      </React.Fragment>
     )
   }
 }
 
-export default Search
+function SearchWithContext (props) {
+  return (
+    <CartConsumer>
+      {
+        (cart) => (<Search {...props} updateCart={cart.updateCart} />)
+      }
+    </CartConsumer>
+  )
+}
+
+export default SearchWithContext

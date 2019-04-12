@@ -19,6 +19,7 @@ import EditSSD from '../edit/EditSSD'
 import Catalog from '../catalog/Catalog'
 import DetailsPage from '../details/DetailsPage'
 import CartPage from '../cart/CartPage'
+import Search from '../search/Search'
 
 function MainRoute (props) {
   return (
@@ -43,6 +44,8 @@ function MainRoute (props) {
       <AdminRoute path='/edit/cpu/:productId' component={EditCPU} />
       <AdminRoute path='/edit/video/:productId' component={EditVideo} />
       <AdminRoute path='/edit/ssd/:productId' component={EditSSD} />
+
+      <PrivateRoute path='/search' component={Search} />
 
       <PrivateRoute path='/cart' component={() => <CartPage cart={props.cart} />} />
 

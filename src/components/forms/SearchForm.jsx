@@ -1,9 +1,19 @@
 import React from 'react'
 import Input from '../common/inputFields/Input'
+import Select from '../common/inputFields/Select'
 
 function SearchForm (props) {
   return (
     <form onSubmit={props.onSubmit}>
+
+      <Select
+        name='type'
+        label='Product type'
+        options={['mainboard', 'cpu', 'video', 'ssd']}
+        onChange={props.onChange}
+        value={props.search.type}
+      />
+
       <Input onChange={props.onChange}
         name='searchName'
         id='searchName'
