@@ -29,7 +29,7 @@ function SearchForm (props) {
       />
       <div className='form-group row'>
         <input type='submit' className='form-control col-sm-3 offset-sm-4 btn btn-primary' value='Search' />
-        <input className='form-control col-sm-3 offset-sm-4 btn btn-primary btn btn-warning' value='Reset' />
+        <button className='form-control col-sm-3 offset-sm-4 btn btn-primary btn btn-warning' onClick={props.onReset}>Reset</button>
       </div>
     </form>
   )

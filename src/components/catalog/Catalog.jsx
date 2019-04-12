@@ -7,7 +7,6 @@ import Spinner from 'react-spinner-material'
 import CatalogItem from './CatalogItem'
 import Select from '../common/inputFields/Select'
 import { CartConsumer } from '../contexts/cart-context'
-import Search from '../search/Search'
 
 class Catalog extends React.Component {
   constructor (props) {
@@ -62,7 +61,6 @@ class Catalog extends React.Component {
     let products
     let type = this.props.match.params.type
     let page = Number(this.props.match.params.page)
-    this.setState({ countPerPage: 3 })
     this.setState({ type })
     try {
       this.setState({ isLoading: true })
@@ -86,7 +84,6 @@ class Catalog extends React.Component {
     return (
       <React.Fragment>
         <h1>Catalog</h1>
-        <Search />
         <div className='text-center'>
           <Select options={['-', 'ASC', 'DESC']} label='Sort by Price' multi={false} onChange={this.sortProducts} />
           {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
