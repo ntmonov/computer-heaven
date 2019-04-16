@@ -5,6 +5,7 @@ import CatalogItem from '../catalog/CatalogItem'
 import Spinner from 'react-spinner-material'
 import { getProductById } from '../../utils/cartRequests'
 import { getSearchCatalog } from '../../utils/searchRequests'
+import { deleteProduct } from '../../utils/catalogRequests.js'
 import { CartConsumer } from '../contexts/cart-context'
 
 class Search extends React.Component {
@@ -12,7 +13,7 @@ class Search extends React.Component {
     super(props)
     this.state = {
       search: {
-        type: 'mainboard',
+        type: 'not-selected',
         searchName: '',
         minPrice: 0,
         maxPrice: 9999
@@ -23,6 +24,24 @@ class Search extends React.Component {
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.onReset = this.onReset.bind(this)
+    this.delProduct = this.delProduct.bind(this)
+  }
+
+  async delProduct (productId) {
+    const { type, searchName, minPrice, maxPrice } = this.state.search
+    await deleteProduct(productId, type)
+    toastr.error('Item deleted')
+    let products
+    try {
+      this.setState({ isLoading: true })
+      products = await getSearchCatalog(type, searchName, minPrice, maxPrice)
+      console.log(products)
+      this.setState({ products })
+      this.setState({ isLoading: false })
+    } catch (error) {
+      toastr.error(products.description)
+      this.setState({ isLoading: false })
+    }
   }
 
   onChange (event) {
@@ -55,8 +74,9 @@ class Search extends React.Component {
         searchName: '',
         minPrice: 0,
         maxPrice: 9999,
-        type: 'mainboard'
-      }
+        type: 'not-selected'
+      },
+      products: []
     })
   }
 
@@ -75,8 +95,10 @@ class Search extends React.Component {
     return (
       <React.Fragment>
         <SearchForm search={this.state.search} onChange={this.onChange} onSubmit={this.onSubmit} onReset={this.onReset} />
-
         <h1 className='text-center'>Search results</h1>
+        <div className='text-center'>
+          { this.state.products.length === 0 ? <h3 className='bg-warning'>No results found</h3> : null }
+        </div>
         <div className='text-center'>
           {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
           {this.state.products.map(prod => (

@@ -48,13 +48,14 @@ class Catalog extends React.Component {
 
   async addToCart (productId) {
     let product = await getProductById(productId, this.state.type)
+
     let data = {
       product,
-      userId: window.sessionStorage.getItem('userId')
+      userId: window.sessionStorage.getItem('userId'),
+      quantity: 1
     }
     this.props.updateCart(data)
     toastr.success('Product added')
-    this.props.history.push('/home')
   }
 
   async getData () {

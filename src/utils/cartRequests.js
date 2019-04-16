@@ -62,7 +62,7 @@ async function getCartProduct (productId) {
   const credentials = 'Kinvey ' + window.sessionStorage.getItem('authToken')
   let userId = window.sessionStorage.getItem('userId')
 
-  const response = await window.fetch(`${BASE_URL}appdata/${APP_KEY}/cart/?query={"userId":"${userId}"}&query={"product._id:${productId}"}`, {
+  const response = await window.fetch(`${BASE_URL}appdata/${APP_KEY}/cart?query={"$and":[{"userId":"${userId}"}, {"product._id":"${productId}"}]}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
