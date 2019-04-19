@@ -12,36 +12,36 @@ function Navbar (props) {
       <div className='collapse navbar-collapse' id='navbarSupportedContent'>
         <ul className='navbar-nav mr-auto'>
           <li className='nav-item'>
-            <NavLink className='nav-link' to='/home'>Home</NavLink>
+            <NavLink className='nav-link' to='/home'>Начало</NavLink>
           </li>
           {!isAuth() && <li className='nav-item'>
-            <NavLink className='nav-link' to='/register'>Register</NavLink>
+            <NavLink className='nav-link' to='/register'>Регистрация</NavLink>
           </li>}
           {!isAuth() && <li className='nav-item'>
-            <NavLink className='nav-link' to='/login'>Login</NavLink>
+            <NavLink className='nav-link' to='/login'>Вход</NavLink>
           </li>}
           {isAuth() && <li className='nav-item'>
-            <NavLink className='nav-link' to='/logout'>Logout</NavLink>
+            <NavLink className='nav-link' to='/logout'>Излез</NavLink>
           </li>}
           {isAuth() && <li className='nav-item'>
-            <NavLink className='nav-link' to='/catalog'>Catalog</NavLink>
+            <NavLink className='nav-link' to='/catalog'>Каталог</NavLink>
           </li>}
           {isAdmin() && <li className='nav-item'>
-            <NavLink className='nav-link' to='/create'>Create</NavLink>
+            <NavLink className='nav-link' to='/create'>Създай</NavLink>
           </li>}
 
           {isAuth() && <li className='nav-item'>
-            <NavLink className='nav-link' to='/search'>Search</NavLink>
+            <NavLink className='nav-link' to='/search'>Търси</NavLink>
           </li>}
 
           {isAuth() && <li className='nav-item'>
-            <NavLink className='nav-link' to='/cart'>Cart</NavLink>
+            <NavLink className='nav-link' to='/cart'>Количка</NavLink>
           </li>}
           <li className='nav-item'>
-            <NavLink className='nav-link' to='/contact'>Contact Us</NavLink>
+            <NavLink className='nav-link' to='/contact'>Контакти</NavLink>
           </li>
           {isAuth() && <span className='navbar-text float: right' >
-            Welcome {window.sessionStorage.getItem('username')}
+            Здравей {window.sessionStorage.getItem('username')}
           </span>}
           {isAuth() && <span className='navbar-text float: right' >
             {/* Cart: {props.cart.length} items | Total: {getTotal(props.cart)} */}
