@@ -1,6 +1,7 @@
 import React from 'react'
 import Input from '../common/inputFields/Input'
 import TextArea from '../common/inputFields/TextArea'
+import Select from '../common/inputFields/Select'
 
 function CreateLaptopForm (props) {
   return (
@@ -12,7 +13,7 @@ function CreateLaptopForm (props) {
         id='name'
         onChange={props.onChange}
         value={props.laptop.name}
-
+        error={props.errors.name}
       />
 
       <TextArea
@@ -20,12 +21,14 @@ function CreateLaptopForm (props) {
         value={props.laptop.description}
         onChange={props.onChange}
         label='Description'
+        error={props.errors.description}
       />
 
       <Input
         name='imageUrl'
         type='text'
         id='imageUrl'
+        label='ImageUrl (optional)'
         onChange={props.onChange}
         value={props.laptop.imageUrl}
       />
@@ -36,6 +39,23 @@ function CreateLaptopForm (props) {
         id='cpu'
         onChange={props.onChange}
         value={props.laptop.cpu}
+        error={props.errors.cpu}
+      />
+
+      <Select
+        name='memory'
+        label='Memmory Size'
+        options={['4GB', '8GB', '16GB']}
+        onChange={props.onChange}
+        value={props.laptop.memory}
+      />
+
+      <Select
+        name='disk'
+        label='Disk Size'
+        options={['120GB', '240GB', '500GB', '1TB']}
+        onChange={props.onChange}
+        value={props.laptop.disk}
       />
 
       <Input
@@ -44,6 +64,7 @@ function CreateLaptopForm (props) {
         id='resolution'
         onChange={props.onChange}
         value={props.laptop.resolution}
+        error={props.errors.resolution}
       />
 
       <Input
@@ -52,6 +73,7 @@ function CreateLaptopForm (props) {
         id='price'
         onChange={props.onChange}
         value={props.laptop.price}
+        error={props.errors.price}
 
       />
 

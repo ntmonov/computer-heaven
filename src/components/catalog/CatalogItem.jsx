@@ -19,7 +19,7 @@ function CatalogItem (props) {
         <Link className='btn btn-primary m-1' to={'/details/' + props.type + '/' + props.prod._id}>Детайли</Link>
         {isAdmin() && <Link className='btn btn-warning m-1' to={'/edit/' + props.type + '/' + props.prod._id}>Редакция</Link>}
         {isAdmin() && <button className='btn btn-danger m-1' onClick={() => props.delProduct(props.prod._id)}>Изтриване</button>}
-        <button onClick={props.addToCart} className='btn btn-primary'>Добави в количката</button>
+        <button onClick={props.addToCart} className='btn btn-secondary'>Добави в количката</button>
       </div>
     </React.Fragment>
   )

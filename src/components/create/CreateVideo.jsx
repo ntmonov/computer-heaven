@@ -14,9 +14,12 @@ class CreateVideo extends React.Component {
         ports: 'VGA',
         description: '',
         imageUrl: '',
-        price: ''
+        price: '',
+        memoryType: 'GDDR5',
+        memoryInterface: '128bit'
       },
-      isLoading: false
+      isLoading: false,
+      errors: {}
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -32,6 +35,11 @@ class CreateVideo extends React.Component {
 
   async onSubmit (event) {
     event.preventDefault()
+
+    if (!this.validateVideo(this.state.video)) {
+      return
+    }
+
     if (this.state.video.imageUrl.length === 0) {
       let video = this.state.video
       video.imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
@@ -50,11 +58,33 @@ class CreateVideo extends React.Component {
     }
   }
 
+  validateVideo (video) {
+    let isValid = true
+    let errors = {}
+    if (!/^[A-Za-z0-9]{3,}$/.test(video.name)) {
+      isValid = false
+      errors['name'] = 'Name must be at laest 3 letters or digits'
+    }
+
+    if (!/^[A-Za-z0-9]{3,}$/.test(video.description)) {
+      isValid = false
+      errors['description'] = 'Description must be at laest 3 letters or digits'
+    }
+
+    if (video.price < 0) {
+      isValid = false
+      errors['price'] = 'Price must be a positive number'
+    }
+
+    this.setState({ errors })
+    return isValid
+  }
+
   render () {
     return (
       <React.Fragment>
         {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
-        <CreateVideoForm onChange={this.onChange} video={this.state.video} onSubmit={this.onSubmit} submitMsg='Създай видео карта' />
+        <CreateVideoForm onChange={this.onChange} video={this.state.video} onSubmit={this.onSubmit} errors={this.state.errors} submitMsg='Създай видео карта' />
       </React.Fragment>
     )
   }

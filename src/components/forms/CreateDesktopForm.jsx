@@ -13,7 +13,8 @@ function CreateDesktopForm (props) {
         id='name'
         onChange={props.onChange}
         value={props.desktop.name}
-
+        label='Name'
+        error={props.errors.name}
       />
 
       <TextArea
@@ -21,6 +22,7 @@ function CreateDesktopForm (props) {
         value={props.desktop.description}
         onChange={props.onChange}
         label='Description'
+        error={props.errors.description}
       />
 
       <Input
@@ -29,6 +31,7 @@ function CreateDesktopForm (props) {
         id='imageUrl'
         onChange={props.onChange}
         value={props.desktop.imageUrl}
+        label='ImageURL (optional)'
       />
 
       <Input
@@ -37,6 +40,18 @@ function CreateDesktopForm (props) {
         id='cpu'
         onChange={props.onChange}
         value={props.desktop.cpu}
+        label='CPU installed'
+        error={props.errors.cpu}
+      />
+
+      <Input
+        name='video'
+        type='text'
+        id='video'
+        onChange={props.onChange}
+        value={props.desktop.video}
+        label='Video card installed'
+        error={props.errors.video}
       />
 
       <Select
@@ -47,13 +62,22 @@ function CreateDesktopForm (props) {
         value={props.desktop.memory}
       />
 
+      <Select
+        name='psu'
+        label='Power Supply'
+        options={['400W', '500W', '600W', '800W']}
+        onChange={props.onChange}
+        value={props.desktop.psu}
+      />
+
       <Input
         name='price'
         type='number'
         id='price'
         onChange={props.onChange}
         value={props.desktop.price}
-
+        label='Price'
+        error={props.errors.price}
       />
 
       <div className='form-group row'>

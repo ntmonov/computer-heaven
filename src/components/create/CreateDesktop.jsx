@@ -14,9 +14,12 @@ class CreateDesktop extends React.Component {
         imageUrl: '',
         price: '',
         cpu: '',
-        memory: ''
+        memory: '',
+        video: '',
+        psu: '400W'
       },
-      isLoading: false
+      isLoading: false,
+      errors: {}
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -32,6 +35,11 @@ class CreateDesktop extends React.Component {
 
   async onSubmit (event) {
     event.preventDefault()
+
+    if (!this.validateDesktop(this.state.desktop)) {
+      return
+    }
+
     if (this.state.desktop.imageUrl.length === 0) {
       let desktop = this.state.desktop
       desktop.imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
@@ -50,11 +58,42 @@ class CreateDesktop extends React.Component {
     }
   }
 
+  validateDesktop (desktop) {
+    let isValid = true
+    let errors = {}
+    if (!/^[A-Za-z0-9]{3,}$/.test(desktop.name)) {
+      isValid = false
+      errors['name'] = 'Name must be at laest 3 letters or digits'
+    }
+
+    if (!/^[A-Za-z0-9]{3,}$/.test(desktop.description)) {
+      isValid = false
+      errors['description'] = 'Description must be at laest 3 letters or digits'
+    }
+
+    if (!/^[A-Za-z0-9]{3,}$/.test(desktop.cpu)) {
+      isValid = false
+      errors['cpu'] = 'CPU must be at laest 3 letters or digits'
+    }
+
+    if (!/^[A-Za-z0-9]{3,}$/.test(desktop.video)) {
+      isValid = false
+      errors['video'] = 'Video card must be at laest 3 letters or digits'
+    }
+
+    if (desktop.price < 0) {
+      isValid = false
+      errors['price'] = 'Price must be a positive number'
+    }
+    this.setState({ errors })
+    return isValid
+  }
+
   render () {
     return (
       <React.Fragment>
         {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
-        <CreateDesktopForm onChange={this.onChange} desktop={this.state.desktop} onSubmit={this.onSubmit} submitMsg='Създай компютър' />
+        <CreateDesktopForm onChange={this.onChange} desktop={this.state.desktop} onSubmit={this.onSubmit} errors={this.state.errors} submitMsg='Създай компютър' />
       </React.Fragment>
     )
   }

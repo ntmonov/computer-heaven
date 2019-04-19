@@ -14,9 +14,12 @@ class CreateLaptop extends React.Component {
         imageUrl: '',
         price: '',
         cpu: '',
-        resolution: ''
+        resolution: '',
+        memory: '4GB',
+        disk: '120GB'
       },
-      isLoading: false
+      isLoading: false,
+      errors: {}
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -32,6 +35,11 @@ class CreateLaptop extends React.Component {
 
   async onSubmit (event) {
     event.preventDefault()
+
+    if (!this.validateLaptop(this.state.laptop)) {
+      return
+    }
+
     if (this.state.laptop.imageUrl.length === 0) {
       let laptop = this.state.laptop
       laptop.imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
@@ -50,11 +58,42 @@ class CreateLaptop extends React.Component {
     }
   }
 
+  validateLaptop (laptop) {
+    let isValid = true
+    let errors = {}
+    if (!/^[A-Za-z0-9]{3,}$/.test(laptop.name)) {
+      isValid = false
+      errors['name'] = 'Name must be at laest 3 letters or digits'
+    }
+
+    if (!/^[A-Za-z0-9]{3,}$/.test(laptop.description)) {
+      isValid = false
+      errors['description'] = 'Description must be at laest 3 letters or digits'
+    }
+
+    if (!/^[A-Za-z0-9]{3,}$/.test(laptop.resolution)) {
+      isValid = false
+      errors['resolution'] = 'Resolution must be at laest 3 letters or digits'
+    }
+
+    if (!/^[A-Za-z0-9]{3,}$/.test(laptop.cpu)) {
+      isValid = false
+      errors['cpu'] = 'CPU must be at laest 3 letters or digits'
+    }
+
+    if (laptop.price < 0) {
+      isValid = false
+      errors['price'] = 'Price must be a positive number'
+    }
+    this.setState({ errors })
+    return isValid
+  }
+
   render () {
     return (
       <React.Fragment>
         {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
-        <CreateLaptopForm onChange={this.onChange} laptop={this.state.laptop} onSubmit={this.onSubmit} submitMsg='Създай лаптоп' />
+        <CreateLaptopForm onChange={this.onChange} laptop={this.state.laptop} onSubmit={this.onSubmit} errors={this.state.errors} submitMsg='Създай лаптоп' />
       </React.Fragment>
     )
   }

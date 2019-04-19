@@ -14,9 +14,11 @@ class CreateMainboard extends React.Component {
         memorySupported: 'DDR4',
         description: '',
         imageUrl: '',
-        price: ''
+        price: '',
+        chipset: ''
       },
-      isLoading: false
+      isLoading: false,
+      errors: {}
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -32,6 +34,11 @@ class CreateMainboard extends React.Component {
 
   async onSubmit (event) {
     event.preventDefault()
+
+    if (!this.validateMainboard(this.state.mainboard)) {
+      return
+    }
+
     if (this.state.mainboard.imageUrl.length === 0) {
       let mainboard = this.state.mainboard
       mainboard.imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
@@ -50,11 +57,37 @@ class CreateMainboard extends React.Component {
     }
   }
 
+  validateMainboard (mainboard) {
+    let isValid = true
+    let errors = {}
+    if (!/^[A-Za-z0-9]{3,}$/.test(mainboard.name)) {
+      isValid = false
+      errors['name'] = 'Name must be at laest 3 letters or digits'
+    }
+
+    if (!/^[A-Za-z0-9]{3,}$/.test(mainboard.description)) {
+      isValid = false
+      errors['description'] = 'Description must be at laest 3 letters or digits'
+    }
+
+    if (!/^[A-Za-z0-9]{3,}$/.test(mainboard.chipset)) {
+      isValid = false
+      errors['chipset'] = 'Chipset must be at laest 3 letters or digits'
+    }
+
+    if (mainboard.price < 0) {
+      isValid = false
+      errors['price'] = 'Price must be a positive number'
+    }
+    this.setState({ errors })
+    return isValid
+  }
+
   render () {
     return (
       <React.Fragment>
         {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
-        <CreateMainboardForm onChange={this.onChange} mb={this.state.mainboard} onSubmit={this.onSubmit} submitMsg='Създай дънна платка' />
+        <CreateMainboardForm onChange={this.onChange} mb={this.state.mainboard} onSubmit={this.onSubmit} errors={this.state.errors} submitMsg='Създай дънна платка' />
       </React.Fragment>
     )
   }

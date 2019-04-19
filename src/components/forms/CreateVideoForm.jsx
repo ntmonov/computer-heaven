@@ -12,6 +12,7 @@ function CreateVideoForm (props) {
         type='text'
         value={props.video.name}
         onChange={props.onChange}
+        error={props.errors.name}
       />
 
       <Select
@@ -23,8 +24,23 @@ function CreateVideoForm (props) {
       />
 
       <Select
+        name='memoryType'
+        label='Memory Type'
+        options={['DDR3', 'GDDR5', 'DDR4']}
+        onChange={props.onChange}
+        value={props.video.memoryType}
+      />
+
+      <Select
+        name='memoryInterface'
+        label='Memory Interface'
+        options={['64bit', '128bit', '192bit', '256bit']}
+        onChange={props.onChange}
+        value={props.video.memoryInterface}
+      />
+
+      <Select
         name='ports'
-        multi='true'
         label='Output Ports'
         options={['VGA', 'DVI', 'HDMI', 'DP']}
         onChange={props.onChange}
@@ -36,6 +52,7 @@ function CreateVideoForm (props) {
         value={props.video.description}
         onChange={props.onChange}
         label='Description'
+        error={props.errors.description}
       />
 
       <Input
@@ -44,6 +61,7 @@ function CreateVideoForm (props) {
         id='imageUrl'
         onChange={props.onChange}
         value={props.video.imageUrl}
+        label='ImageURL (optional)'
       />
 
       <Input
@@ -52,6 +70,7 @@ function CreateVideoForm (props) {
         id='price'
         onChange={props.onChange}
         value={props.video.price}
+        error={props.errors.price}
       />
 
       <div className='form-group row'>

@@ -13,13 +13,24 @@ function CreateMainboardForm (props) {
         id='name'
         onChange={props.onChange}
         value={props.mb.name}
+        label='Name'
+        error={props.errors.name}
+      />
 
+      <Input
+        name='chipset'
+        type='text'
+        id='chipset'
+        onChange={props.onChange}
+        value={props.mb.chipset}
+        label='Chipset'
+        error={props.errors.chipset}
       />
 
       <Select
         name='socket'
         label='Socket'
-        options={['1151', 'AM4', 1150]}
+        options={['1151', 'AM4', '1150']}
         onChaange={props.onChange}
         value={props.mb.socket}
       />
@@ -37,6 +48,7 @@ function CreateMainboardForm (props) {
         value={props.mb.description}
         onChange={props.onChange}
         label='Description'
+        error={props.errors.description}
       />
 
       <Input
@@ -45,6 +57,7 @@ function CreateMainboardForm (props) {
         id='imageUrl'
         onChange={props.onChange}
         value={props.mb.imageUrl}
+        label='ImageURL (optional)'
       />
 
       <Input
@@ -53,6 +66,7 @@ function CreateMainboardForm (props) {
         id='price'
         onChange={props.onChange}
         value={props.mb.price}
+        error={props.errors.price}
 
       />
 

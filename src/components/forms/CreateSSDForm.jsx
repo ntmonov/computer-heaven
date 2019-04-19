@@ -12,6 +12,7 @@ function CreateSSDForm (props) {
         id='name'
         onChange={props.onChange}
         value={props.ssd.name}
+        error={props.errors.name}
       />
 
       <Input
@@ -20,6 +21,8 @@ function CreateSSDForm (props) {
         id='capacity'
         onChange={props.onChange}
         value={props.ssd.capacity}
+        error={props.errors.capacity}
+        label='Capacity'
       />
 
       <Select
@@ -29,11 +32,21 @@ function CreateSSDForm (props) {
         onChange={props.onChange}
         value={props.ssd.interface}
       />
+
+      <Select
+        name='factor'
+        label='Form factor'
+        options={['M2', '2.5', '3.5']}
+        onChange={props.onChange}
+        value={props.ssd.factor}
+      />
+
       <TextArea
         name='description'
         value={props.ssd.description}
         onChange={props.onChange}
         label='Description'
+        error={props.errors.description}
       />
 
       <Input
@@ -42,6 +55,7 @@ function CreateSSDForm (props) {
         id='imageUrl'
         onChange={props.onChange}
         value={props.ssd.imageUrl}
+        label='ImageURL (optional)'
       />
 
       <Input
@@ -50,9 +64,10 @@ function CreateSSDForm (props) {
         id='price'
         onChange={props.onChange}
         value={props.ssd.price}
+        error={props.errors.price}
       />
 
-      <div class='form-group row'>
+      <div className='form-group row'>
         <input type='submit' className='form-control col-sm-3 offset-sm-4 btn btn-primary' value={props.submitMsg} />
       </div>
 
