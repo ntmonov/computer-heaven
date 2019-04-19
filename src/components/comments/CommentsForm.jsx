@@ -58,15 +58,13 @@ class CommentsForm extends React.Component {
             <input type='submit' className='form-control col-sm-3 offset-sm-4 btn btn-primary' value='Comment' />
           </div>
           {this.state.comments.map(comment => (
-
-            <div key={comment._id} className='card text-white bg-primary mb-3' style={{ width: '18rem' }}>
+            <div key={comment._id} className='card text-white bg-primary mb-3 col-md-4 offset-md-4' style={{ width: '18rem' }}>
               <div className='card-body'>
                 <h5 className='card-title'>by {comment.author}</h5>
                 <p className='card-text'>{comment.text}</p>
                 <p className='card-text' style={{ fontStyle: 'italic' }}>posted on {new Date(comment._kmd.ect).toLocaleDateString()}</p>
               </div>
             </div>
-
           ))}
         </form>
       </React.Fragment>
