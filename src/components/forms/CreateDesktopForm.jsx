@@ -1,6 +1,7 @@
 import React from 'react'
 import Input from '../common/inputFields/Input'
 import TextArea from '../common/inputFields/TextArea'
+import Select from '../common/inputFields/Select'
 
 function CreateDesktopForm (props) {
   return (
@@ -28,6 +29,22 @@ function CreateDesktopForm (props) {
         id='imageUrl'
         onChange={props.onChange}
         value={props.desktop.imageUrl}
+      />
+
+      <Input
+        name='cpu'
+        type='text'
+        id='cpu'
+        onChange={props.onChange}
+        value={props.desktop.cpu}
+      />
+
+      <Select
+        name='memory'
+        label='Memmory Size'
+        options={['2GB', '4GB', '8GB', '16GB']}
+        onChange={props.onChange}
+        value={props.desktop.memory}
       />
 
       <Input

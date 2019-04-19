@@ -12,7 +12,9 @@ class CreateDesktop extends React.Component {
         name: '',
         description: '',
         imageUrl: '',
-        price: ''
+        price: '',
+        cpu: '',
+        memory: ''
       },
       isLoading: false
     }

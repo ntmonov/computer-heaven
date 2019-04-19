@@ -16,10 +16,10 @@ function CatalogItem (props) {
             </div>
           </div>
         </div>
-        <Link className='btn btn-primary m-1' to={'/details/' + props.type + '/' + props.prod._id}>Details</Link>
-        {isAdmin() && <Link className='btn btn-warning m-1' to={'/edit/' + props.type + '/' + props.prod._id}>Edit</Link>}
-        {isAdmin() && <button className='btn btn-danger m-1' onClick={() => props.delProduct(props.prod._id)}>Delete</button>}
-        <button onClick={props.addToCart}>Add to cart</button>
+        <Link className='btn btn-primary m-1' to={'/details/' + props.type + '/' + props.prod._id}>Детайли</Link>
+        {isAdmin() && <Link className='btn btn-warning m-1' to={'/edit/' + props.type + '/' + props.prod._id}>Редакция</Link>}
+        {isAdmin() && <button className='btn btn-danger m-1' onClick={() => props.delProduct(props.prod._id)}>Изтриване</button>}
+        <button onClick={props.addToCart} className='btn btn-primary'>Добави в количката</button>
       </div>
     </React.Fragment>
   )

@@ -14,42 +14,42 @@ function CatalogPage (props) {
       <div className='createMenu'>
         <Link to='/catalog/mainboard/1'><img src={mb} alt={mb} /></Link>
         <div className='text-center'>
-          <p>Mainboards</p>
+          <p>Дънни платки</p>
         </div>
       </div>
 
       <div className='createMenu'>
         <Link to='/catalog/cpu/1'><img src={cpu} alt={cpu} /></Link>
         <div className='text-center'>
-          <p>Processors</p>
+          <p>Процесори</p>
         </div>
       </div>
 
       <div className='createMenu'>
         <Link to='/catalog/video/1'><img src={video} alt={video} /></Link>
         <div className='text-center'>
-          <p>Video Cards</p>
+          <p>Видео карти</p>
         </div>
       </div>
 
       <div className='createMenu'>
         <Link to='/catalog/ssd/1'><img src={ssd} alt={ssd} /></Link>
         <div className='text-center'>
-          <p>SSD</p>
+          <p>Дискове</p>
         </div>
       </div>
 
       <div className='createMenu'>
         <Link to='/catalog/desktop/1'><img style={{ width: '300px' }} src={desktop} alt={desktop} /></Link>
         <div className='text-center'>
-          <p>Desktop</p>
+          <p>Настолни компютри</p>
         </div>
       </div>
 
       <div className='createMenu'>
         <Link to='/catalog/laptop/1'><img style={{ width: '300px' }} src={laptop} alt={laptop} /></Link>
         <div className='text-center'>
-          <p>Laptop</p>
+          <p>Лаптопи</p>
         </div>
       </div>
     </React.Fragment>

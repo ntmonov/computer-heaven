@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { getCatalog, deleteProduct, getCount } from '../../utils/catalogRequests'
-import { getProductById, getCartProduct, addToCart, updateCartWithQty } from '../../utils/cartRequests'
+import { getProductById } from '../../utils/cartRequests'
 import toastr from 'toastr'
 import Spinner from 'react-spinner-material'
 import CatalogItem from './CatalogItem'
@@ -86,16 +86,16 @@ class Catalog extends React.Component {
       <React.Fragment>
         <h1>Catalog</h1>
         <div className='text-center'>
-          <Select options={['-', 'ASC', 'DESC']} label='Sort by Price' multi={false} onChange={this.sortProducts} />
+          <Select options={['-', 'ASC', 'DESC']} label='Сортирай по цена' multi={false} onChange={this.sortProducts} />
           {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
           {this.state.products.map(prod => (
             <CatalogItem key={prod._id} delProduct={this.delProduct} prod={prod} type={this.state.type} addToCart={() => { this.addToCart(prod._id) }} />
           ))}
         </div>
         <div className='text-center'>
-          {page < (this.state.count / 3) && <Link className='btn btn-primary' to={`/catalog/${type}/${page + 1}`} onClick={this.forceUpdate} >Next</Link>}
+          {page < (this.state.count / 3) && <Link className='btn btn-primary' to={`/catalog/${type}/${page + 1}`} onClick={this.forceUpdate} >Следваща</Link>}
           { ' ' }
-          {page > 1 && <Link className='btn btn-primary' to={`/catalog/${type}/${page - 1}`} onClick={this.forceUpdate} >Prev</Link>}
+          {page > 1 && <Link className='btn btn-primary' to={`/catalog/${type}/${page - 1}`} onClick={this.forceUpdate} >Предишна</Link>}
           <p>Page {page} of {Math.ceil(this.state.count / 3)}</p>
         </div>
       </React.Fragment>

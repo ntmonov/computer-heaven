@@ -47,7 +47,7 @@ class DetailsPage extends React.Component {
           </div>
         </div>
         <div>
-          <CommentsForm type={this.props.type} productId={this.props.match.params.type} />
+          <CommentsForm type={this.props.type} productId={this.props.match.params.productId} />
         </div>
       </div>
     )
@@ -62,5 +62,5 @@ const styles = {
 
 const stylesForMainDiv = {
   width: '80%',
-  margin: '0 auto',
+  margin: '0 auto'
 }
