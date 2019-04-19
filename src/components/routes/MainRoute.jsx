@@ -20,6 +20,7 @@ import Catalog from '../catalog/Catalog'
 import DetailsPage from '../details/DetailsPage'
 import CartPage from '../cart/CartPage'
 import Search from '../search/Search'
+import ContactPage from '../contact/ContactPage'
 
 function MainRoute (props) {
   return (
@@ -48,6 +49,8 @@ function MainRoute (props) {
       <PrivateRoute path='/search' component={Search} />
 
       <PrivateRoute path='/cart' component={() => <CartPage cart={props.cart} />} />
+
+      <Route path='/contact' component={ContactPage} />
 
     </React.Fragment>
   )

@@ -4,6 +4,7 @@ import Navbar from './components/common/Navbar'
 import MainRoute from './components/routes/MainRoute'
 import { getCart, addToCart, updateCartWithQty, getCartProduct } from '../src/utils/cartRequests'
 import { CartProvider } from './components/contexts/cart-context'
+import Footer from './components/common/Footer'
 
 class App extends Component {
   constructor (props) {
@@ -26,13 +27,13 @@ class App extends Component {
         data.quantity++
       }
     }
-    cart.cart.push(data)
-    this.setState({ cart })
+
     if (cartItemId === undefined) {
       await addToCart(data)
     } else {
       await updateCartWithQty(data, cartItemId)
     }
+    await this.getInitialCart()
   }
 
   async getInitialCart () {
@@ -48,6 +49,7 @@ class App extends Component {
         <CartProvider value={this.state.cart}>
           <Navbar />
           <MainRoute />
+          <Footer />
         </CartProvider>
       </React.Fragment>
     )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { getCatalog, deleteProduct, getCount } from '../../utils/catalogRequests'
-import { getProductById } from '../../utils/cartRequests'
+import { getProductById, getCartProduct, addToCart, updateCartWithQty } from '../../utils/cartRequests'
 import toastr from 'toastr'
 import Spinner from 'react-spinner-material'
 import CatalogItem from './CatalogItem'

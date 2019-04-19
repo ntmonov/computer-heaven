@@ -37,11 +37,14 @@ function Navbar (props) {
           {isAuth() && <li className='nav-item'>
             <NavLink className='nav-link' to='/cart'>Cart</NavLink>
           </li>}
+          <li className='nav-item'>
+            <NavLink className='nav-link' to='/contact'>Contact Us</NavLink>
+          </li>
           {isAuth() && <span className='navbar-text float: right' >
             Welcome {window.sessionStorage.getItem('username')}
           </span>}
           {isAuth() && <span className='navbar-text float: right' >
-            Cart: {props.cart.length} items | Total: {getTotal(props.cart)}
+            {/* Cart: {props.cart.length} items | Total: {getTotal(props.cart)} */}
           </span>}
         </ul>
       </div>
@@ -49,13 +52,14 @@ function Navbar (props) {
   )
 }
 
-function getTotal (items) {
-  let sum = 0
-  for (let p of items) {
-    sum += Number(p.product.price)
-  }
-  return sum
-}
+// function getTotal (items) {
+//   let sum = 0
+//   console.log(items)
+//   for (let p in items) {
+//     sum += Number(items[p].product.price) * Number(items[p].quantity)
+//   }
+//   return sum
+// }
 
 function NavbarConsumer (props) {
   return (
