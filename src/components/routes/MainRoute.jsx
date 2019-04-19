@@ -29,6 +29,7 @@ import EditLaptop from '../edit/EditLaptop'
 function MainRoute (props) {
   return (
     <React.Fragment>
+      <Route exact path='/' component={HomePage} />
       <Route exact path='/home' component={HomePage} />
       <Route path='/register' component={RegisterPage} />
       <Route path='/login' component={() => <LoginPage getUserId={props.getUserId} />} />
