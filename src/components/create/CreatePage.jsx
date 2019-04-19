@@ -4,6 +4,8 @@ import mb from '../../images/mb.jpg'
 import cpu from '../../images/cpu.jpg'
 import video from '../../images/video.jpg'
 import ssd from '../../images/ssd.jpg'
+import desktop from '../../images/desktop1.jpg'
+import laptop from '../../images/laptop.jpg'
 
 function CreatePage (props) {
   return (
@@ -34,6 +36,20 @@ function CreatePage (props) {
         <Link to='/create/ssd'><img src={ssd} alt={ssd} /></Link>
         <div className='text-center'>
           <p>SSD</p>
+        </div>
+      </div>
+
+      <div className='createMenu'>
+        <Link to='/create/desktop'><img style={{ width: '300px' }} src={desktop} alt={desktop} /></Link>
+        <div className='text-center'>
+          <p>Desktop</p>
+        </div>
+      </div>
+
+      <div className='createMenu'>
+        <Link to='/create/laptop'><img style={{ width: '300px' }} src={laptop} alt={laptop} /></Link>
+        <div className='text-center'>
+          <p>Laptop</p>
         </div>
       </div>
     </React.Fragment>

@@ -21,6 +21,10 @@ import DetailsPage from '../details/DetailsPage'
 import CartPage from '../cart/CartPage'
 import Search from '../search/Search'
 import ContactPage from '../contact/ContactPage'
+import CreateDesktop from '../create/CreateDesktop'
+import EditDesktop from '../edit/EditDesktop'
+import CreateLaptop from '../create/CreateLaptop'
+import EditLaptop from '../edit/EditLaptop'
 
 function MainRoute (props) {
   return (
@@ -38,6 +42,8 @@ function MainRoute (props) {
       <AdminRoute path='/create/cpu' component={CreateCPU} />
       <AdminRoute path='/create/video' component={CreateVideo} />
       <AdminRoute path='/create/ssd' component={CreateSSD} />
+      <AdminRoute path='/create/desktop' component={CreateDesktop} />
+      <AdminRoute path='/create/laptop' component={CreateLaptop} />
 
       <PrivateRoute path='/details/:type/:productId' component={DetailsPage} />
 
@@ -45,6 +51,8 @@ function MainRoute (props) {
       <AdminRoute path='/edit/cpu/:productId' component={EditCPU} />
       <AdminRoute path='/edit/video/:productId' component={EditVideo} />
       <AdminRoute path='/edit/ssd/:productId' component={EditSSD} />
+      <AdminRoute path='/edit/desktop/:productId' component={EditDesktop} />
+      <AdminRoute path='/edit/laptop/:productId' component={EditLaptop} />
 
       <PrivateRoute path='/search' component={Search} />
 

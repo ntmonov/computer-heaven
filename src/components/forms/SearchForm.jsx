@@ -9,7 +9,7 @@ function SearchForm (props) {
       <Select
         name='type'
         label='Product type'
-        options={['not-selected', 'mainboard', 'cpu', 'video', 'ssd']}
+        options={['not-selected', 'mainboard', 'cpu', 'video', 'ssd', 'desktop', 'laptop']}
         onChange={props.onChange}
         value={props.search.type}
       />

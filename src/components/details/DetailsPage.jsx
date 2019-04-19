@@ -33,10 +33,10 @@ class DetailsPage extends React.Component {
           <img className='card-img-top' style={styles} src={imageUrl} alt={imageUrl} />
           <div className='card-body'>
             <h5 className='card-title'>{name}</h5>
-            <h3>Description</h3>
+            {/* <h3>Описание</h3> */}
             <p>{description}</p>
-            <h3>Price: {price}</h3>
-            <h3>Specfications</h3>
+            <h3>Цена: {price}</h3>
+            <h3>Технически характеристики</h3>
             {list}
           </div>
         </div>
