@@ -54,7 +54,7 @@ class CreateDesktop extends React.Component {
     return (
       <React.Fragment>
         {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
-        <CreateDesktopForm onChange={this.onChange} desktop={this.state.desktop} onSubmit={this.onSubmit} submitMsg='Create desktop' />
+        <CreateDesktopForm onChange={this.onChange} desktop={this.state.desktop} onSubmit={this.onSubmit} submitMsg='Създай компютър' />
       </React.Fragment>
     )
   }

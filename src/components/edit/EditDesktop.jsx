@@ -54,7 +54,7 @@ class EditDesktop extends React.Component {
 
   render () {
     return (
-      <CreateDesktopForm onChange={this.onChange} desktop={this.state.desktop} onSubmit={this.onSubmit} submitMsg='Edit desktop' />
+      <CreateDesktopForm onChange={this.onChange} desktop={this.state.desktop} onSubmit={this.onSubmit} submitMsg='Редактирай' />
     )
   }
 }

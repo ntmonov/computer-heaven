@@ -54,7 +54,7 @@ class CreateMainboard extends React.Component {
     return (
       <React.Fragment>
         {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
-        <CreateMainboardForm onChange={this.onChange} mb={this.state.mainboard} onSubmit={this.onSubmit} submitMsg='Create mainboard' />
+        <CreateMainboardForm onChange={this.onChange} mb={this.state.mainboard} onSubmit={this.onSubmit} submitMsg='Създай дънна платка' />
       </React.Fragment>
     )
   }

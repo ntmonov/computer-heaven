@@ -54,7 +54,7 @@ class CreateLaptop extends React.Component {
     return (
       <React.Fragment>
         {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
-        <CreateLaptopForm onChange={this.onChange} laptop={this.state.laptop} onSubmit={this.onSubmit} submitMsg='Create laptop' />
+        <CreateLaptopForm onChange={this.onChange} laptop={this.state.laptop} onSubmit={this.onSubmit} submitMsg='Създай лаптоп' />
       </React.Fragment>
     )
   }

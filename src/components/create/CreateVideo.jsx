@@ -54,7 +54,7 @@ class CreateVideo extends React.Component {
     return (
       <React.Fragment>
         {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
-        <CreateVideoForm onChange={this.onChange} video={this.state.video} onSubmit={this.onSubmit} submitMsg='Create video card' />
+        <CreateVideoForm onChange={this.onChange} video={this.state.video} onSubmit={this.onSubmit} submitMsg='Създай видео карта' />
       </React.Fragment>
     )
   }

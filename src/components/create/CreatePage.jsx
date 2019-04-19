@@ -14,42 +14,42 @@ function CreatePage (props) {
       <div className='createMenu'>
         <Link to='/create/mb'><img src={mb} alt={mb} /></Link>
         <div className='text-center'>
-          <p>Mainboards</p>
+          <p>Дънни платки</p>
         </div>
       </div>
 
       <div className='createMenu'>
         <Link to='/create/cpu'><img src={cpu} alt={cpu} /></Link>
         <div className='text-center'>
-          <p>Processors</p>
+          <p>Процесори</p>
         </div>
       </div>
 
       <div className='createMenu'>
         <Link to='/create/video'><img src={video} alt={video} /></Link>
         <div className='text-center'>
-          <p>Video Cards</p>
+          <p>Видео карти</p>
         </div>
       </div>
 
       <div className='createMenu'>
         <Link to='/create/ssd'><img src={ssd} alt={ssd} /></Link>
         <div className='text-center'>
-          <p>SSD</p>
+          <p>Дискове</p>
         </div>
       </div>
 
       <div className='createMenu'>
         <Link to='/create/desktop'><img style={{ width: '300px' }} src={desktop} alt={desktop} /></Link>
         <div className='text-center'>
-          <p>Desktop</p>
+          <p>Настолни компютри</p>
         </div>
       </div>
 
       <div className='createMenu'>
         <Link to='/create/laptop'><img style={{ width: '300px' }} src={laptop} alt={laptop} /></Link>
         <div className='text-center'>
-          <p>Laptop</p>
+          <p>Лаптопи</p>
         </div>
       </div>
     </React.Fragment>

@@ -54,7 +54,7 @@ class EditLaptop extends React.Component {
 
   render () {
     return (
-      <CreateLaptopForm onChange={this.onChange} laptop={this.state.laptop} onSubmit={this.onSubmit} submitMsg='Edit laptop' />
+      <CreateLaptopForm onChange={this.onChange} laptop={this.state.laptop} onSubmit={this.onSubmit} submitMsg='Редактирай' />
     )
   }
 }

@@ -49,7 +49,7 @@ function RegisterForm (props) {
         error={props.errors.address}
       />
       <div className='form-group row'>
-        <input type='submit' className='form-control col-sm-3 offset-sm-4 btn btn-primary' value='Register' />
+        <input type='submit' className='form-control col-sm-3 offset-sm-4 btn btn-primary' value='Регистрирай се' />
       </div>
 
     </form>

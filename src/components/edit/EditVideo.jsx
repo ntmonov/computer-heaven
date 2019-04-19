@@ -55,7 +55,7 @@ class EditVideo extends React.Component {
 
   render () {
     return (
-      <CreateVideoForm onChange={this.onChange} video={this.state.video} onSubmit={this.onSubmit} submitMsg='Edit video card' />
+      <CreateVideoForm onChange={this.onChange} video={this.state.video} onSubmit={this.onSubmit} submitMsg='Редактирай' />
     )
   }
 }
