@@ -3,6 +3,7 @@ import { create } from '../../utils/catalogRequests'
 import toastr from 'toastr'
 import Spinner from 'react-spinner-material'
 import CreateSSDForm from '../forms/CreateSSDForm'
+import validate from '../../utils/formValidator.js'
 
 class CreateMainboard extends React.Component {
   constructor (props) {
@@ -35,7 +36,10 @@ class CreateMainboard extends React.Component {
   async onSubmit (event) {
     event.preventDefault()
 
-    if (!this.validateSSD(this.state.ssd)) {
+    const { isValid, errors } = validate(this.state.ssd)
+
+    if (!isValid) {
+      this.setState({ errors })
       return
     }
 
@@ -55,32 +59,6 @@ class CreateMainboard extends React.Component {
       toastr.error(item.description)
       this.setState({ isLoading: false })
     }
-  }
-
-  validateSSD (ssd) {
-    let isValid = true
-    let errors = {}
-    if (!/^[A-Za-z0-9]{3,}$/.test(ssd.name)) {
-      isValid = false
-      errors['name'] = 'Name must be at laest 3 letters or digits'
-    }
-
-    if (!/^[A-Za-z0-9]{3,}$/.test(ssd.description)) {
-      isValid = false
-      errors['description'] = 'Description must be at laest 3 letters or digits'
-    }
-
-    if (ssd.price < 0) {
-      isValid = false
-      errors['price'] = 'Price must be a positive number'
-    }
-
-    if (ssd.capacity < 0) {
-      isValid = false
-      errors['capacity'] = 'Capacity must be a positive number'
-    }
-    this.setState({ errors })
-    return isValid
   }
 
   render () {

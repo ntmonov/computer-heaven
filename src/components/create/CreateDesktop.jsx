@@ -3,6 +3,7 @@ import CreateDesktopForm from '../forms/CreateDesktopForm'
 import { create } from '../../utils/catalogRequests'
 import toastr from 'toastr'
 import Spinner from 'react-spinner-material'
+import validate from '../../utils/formValidator.js'
 
 class CreateDesktop extends React.Component {
   constructor (props) {
@@ -35,8 +36,10 @@ class CreateDesktop extends React.Component {
 
   async onSubmit (event) {
     event.preventDefault()
+    const { isValid, errors } = validate(this.state.desktop)
 
-    if (!this.validateDesktop(this.state.desktop)) {
+    if (!isValid) {
+      this.setState({ errors })
       return
     }
 
@@ -56,37 +59,6 @@ class CreateDesktop extends React.Component {
       toastr.error(item.description)
       this.setState({ isLoading: false })
     }
-  }
-
-  validateDesktop (desktop) {
-    let isValid = true
-    let errors = {}
-    if (!/^[A-Za-z0-9]{3,}$/.test(desktop.name)) {
-      isValid = false
-      errors['name'] = 'Name must be at laest 3 letters or digits'
-    }
-
-    if (!/^[A-Za-z0-9]{3,}$/.test(desktop.description)) {
-      isValid = false
-      errors['description'] = 'Description must be at laest 3 letters or digits'
-    }
-
-    if (!/^[A-Za-z0-9]{3,}$/.test(desktop.cpu)) {
-      isValid = false
-      errors['cpu'] = 'CPU must be at laest 3 letters or digits'
-    }
-
-    if (!/^[A-Za-z0-9]{3,}$/.test(desktop.video)) {
-      isValid = false
-      errors['video'] = 'Video card must be at laest 3 letters or digits'
-    }
-
-    if (desktop.price < 0) {
-      isValid = false
-      errors['price'] = 'Price must be a positive number'
-    }
-    this.setState({ errors })
-    return isValid
   }
 
   render () {

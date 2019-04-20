@@ -3,6 +3,7 @@ import CreateMainboardForm from '../forms/CreateMainboardForm'
 import { create } from '../../utils/catalogRequests'
 import toastr from 'toastr'
 import Spinner from 'react-spinner-material'
+import validate from '../../utils/formValidator.js'
 
 class CreateMainboard extends React.Component {
   constructor (props) {
@@ -35,7 +36,10 @@ class CreateMainboard extends React.Component {
   async onSubmit (event) {
     event.preventDefault()
 
-    if (!this.validateMainboard(this.state.mainboard)) {
+    const { isValid, errors } = validate(this.state.mainboard)
+
+    if (!isValid) {
+      this.setState({ errors })
       return
     }
 
@@ -55,32 +59,6 @@ class CreateMainboard extends React.Component {
       toastr.error(item.description)
       this.setState({ isLoading: false })
     }
-  }
-
-  validateMainboard (mainboard) {
-    let isValid = true
-    let errors = {}
-    if (!/^[A-Za-z0-9]{3,}$/.test(mainboard.name)) {
-      isValid = false
-      errors['name'] = 'Name must be at laest 3 letters or digits'
-    }
-
-    if (!/^[A-Za-z0-9]{3,}$/.test(mainboard.description)) {
-      isValid = false
-      errors['description'] = 'Description must be at laest 3 letters or digits'
-    }
-
-    if (!/^[A-Za-z0-9]{3,}$/.test(mainboard.chipset)) {
-      isValid = false
-      errors['chipset'] = 'Chipset must be at laest 3 letters or digits'
-    }
-
-    if (mainboard.price < 0) {
-      isValid = false
-      errors['price'] = 'Price must be a positive number'
-    }
-    this.setState({ errors })
-    return isValid
   }
 
   render () {

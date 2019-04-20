@@ -3,6 +3,7 @@ import { create } from '../../utils/catalogRequests'
 import toastr from 'toastr'
 import Spinner from 'react-spinner-material'
 import CreateCPUForm from '../forms/CreateCPUForm'
+import validate from '../../utils/formValidator.js'
 
 class CreateMainboard extends React.Component {
   constructor (props) {
@@ -36,7 +37,9 @@ class CreateMainboard extends React.Component {
 
   async onSubmit (event) {
     event.preventDefault()
-    if (!this.validateCPU(this.state.cpu)) {
+    const { isValid, errors } = validate(this.state.cpu)
+    if (!isValid) {
+      this.setState({ errors })
       return
     }
     if (this.state.cpu.imageUrl.length === 0) {
@@ -55,37 +58,6 @@ class CreateMainboard extends React.Component {
       toastr.error(item.description)
       this.setState({ isLoading: false })
     }
-  }
-
-  validateCPU (cpu) {
-    let isValid = true
-    let errors = {}
-    if (!/^[A-Za-z0-9]{3,}$/.test(cpu.name)) {
-      isValid = false
-      errors['name'] = 'Name must be at laest 3 letters or digits'
-    }
-
-    if (!/^[A-Za-z0-9]{3,}$/.test(cpu.description)) {
-      isValid = false
-      errors['description'] = 'Description must be at laest 3 letters or digits'
-    }
-
-    if (cpu.frequency < 0) {
-      isValid = false
-      errors['frequency'] = 'Frequency must be a positive number'
-    }
-
-    if (cpu.tdp < 0) {
-      isValid = false
-      errors['tdp'] = 'TDP must be a positive number'
-    }
-
-    if (cpu.price < 0) {
-      isValid = false
-      errors['price'] = 'Price must be a positive number'
-    }
-    this.setState({ errors })
-    return isValid
   }
 
   render () {

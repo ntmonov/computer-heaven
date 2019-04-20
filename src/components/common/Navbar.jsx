@@ -54,7 +54,12 @@ function Navbar (props) {
 
 function getTotal (items) {
   let sum = 0
+  console.log(items)
+
   for (let p in items) {
+    if (!items[p].product) {
+      continue
+    }
     sum += Number(items[p].product.price)
   }
   return sum
