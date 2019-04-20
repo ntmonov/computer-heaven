@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import Navbar from './components/common/Navbar'
 import MainRoute from './components/routes/MainRoute'
-import { getCart, addToCart, updateCartWithQty, getCartProduct } from '../src/utils/cartRequests'
+import { getCart, addToCart, deleteFromCart, getCartProduct } from '../src/utils/cartRequests'
 import { CartProvider } from './components/contexts/cart-context'
 import Footer from './components/common/Footer'
 
@@ -13,26 +13,15 @@ class App extends Component {
       cart: {
         cart: [],
         updateCart: this.updateCart.bind(this),
-        getInitialCart: this.getInitialCart.bind(this)
+        getInitialCart: this.getInitialCart.bind(this),
+        deleteFromCart: this.deleteFromCart.bind(this)
       }
     }
+    this.getInitialCart()
   }
 
   async updateCart (data) {
-    let cart = this.state.cart
-    let cartItem = await getCartProduct(data.product._id)
-    const cartItemId = cartItem.length === 0 ? undefined : cartItem[0]._id
-    for (let prod of cart.cart) {
-      if (prod.product._id === data.product._id) {
-        data.quantity++
-      }
-    }
-
-    if (cartItemId === undefined) {
-      await addToCart(data)
-    } else {
-      await updateCartWithQty(data, cartItemId)
-    }
+    await addToCart(data)
     await this.getInitialCart()
   }
 
@@ -41,6 +30,13 @@ class App extends Component {
     let { cart } = this.state.cart
     cart = initialCart
     this.setState({ cart: { ...this.state.cart, cart } })
+  }
+
+  async deleteFromCart (productId) {
+    let cartItem = await getCartProduct(productId)
+    console.log(cartItem)
+    await deleteFromCart(cartItem[0]._id)
+    this.getInitialCart()
   }
 
   render () {

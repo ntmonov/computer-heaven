@@ -99,4 +99,17 @@ async function getCartQuantity (cartItemId) {
   return response.json()
 }
 
-export { addToCart, getCart, getProductById, getAllProducts, incQuantity, getCartProduct, updateCartWithQty, getCartQuantity }
+async function deleteFromCart (cartId) {
+  const credentials = 'Kinvey ' + window.sessionStorage.getItem('authToken')
+
+  const response = await window.fetch(`${BASE_URL}appdata/${APP_KEY}/cart/${cartId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': credentials
+    }
+  })
+  return response.json()
+}
+
+export { addToCart, getCart, getProductById, getAllProducts, incQuantity, getCartProduct, updateCartWithQty, getCartQuantity, deleteFromCart }

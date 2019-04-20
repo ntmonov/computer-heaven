@@ -52,7 +52,7 @@ class Catalog extends React.Component {
     let data = {
       product,
       userId: window.sessionStorage.getItem('userId'),
-      quantity: 1
+      type: this.state.type
     }
     this.props.updateCart(data)
     toastr.success('Product added')

@@ -12,48 +12,52 @@ function CatalogPage (props) {
     <React.Fragment>
       <h1>Catalog page</h1>
       <div className='createMenu'>
-        <Link to='/catalog/mainboard/1'><img src={mb} alt={mb} /></Link>
+        <Link to='/catalog/mainboard/1'><img style={style} src={mb} alt={mb} /></Link>
         <div className='text-center'>
           <p>Дънни платки</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/catalog/cpu/1'><img src={cpu} alt={cpu} /></Link>
+        <Link to='/catalog/cpu/1'><img style={style} src={cpu} alt={cpu} /></Link>
         <div className='text-center'>
           <p>Процесори</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/catalog/video/1'><img src={video} alt={video} /></Link>
+        <Link to='/catalog/video/1'><img style={style} src={video} alt={video} /></Link>
         <div className='text-center'>
           <p>Видео карти</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/catalog/ssd/1'><img src={ssd} alt={ssd} /></Link>
+        <Link to='/catalog/ssd/1'><img style={style} src={ssd} alt={ssd} /></Link>
         <div className='text-center'>
           <p>Дискове</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/catalog/desktop/1'><img style={{ width: '300px' }} src={desktop} alt={desktop} /></Link>
+        <Link to='/catalog/desktop/1'><img style={style} src={desktop} alt={desktop} /></Link>
         <div className='text-center'>
           <p>Настолни компютри</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/catalog/laptop/1'><img style={{ width: '300px' }} src={laptop} alt={laptop} /></Link>
+        <Link to='/catalog/laptop/1'><img style={style} src={laptop} alt={laptop} /></Link>
         <div className='text-center'>
           <p>Лаптопи</p>
         </div>
       </div>
     </React.Fragment>
   )
+}
+
+const style = {
+  width: '240px'
 }
 
 export default CatalogPage

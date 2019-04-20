@@ -12,48 +12,52 @@ function CreatePage (props) {
     <React.Fragment>
       <h1>Create page</h1>
       <div className='createMenu'>
-        <Link to='/create/mb'><img src={mb} alt={mb} /></Link>
+        <Link to='/create/mb'><img style={style} src={mb} alt={mb} /></Link>
         <div className='text-center'>
           <p>Дънни платки</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/create/cpu'><img src={cpu} alt={cpu} /></Link>
+        <Link to='/create/cpu'><img style={style} src={cpu} alt={cpu} /></Link>
         <div className='text-center'>
           <p>Процесори</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/create/video'><img src={video} alt={video} /></Link>
+        <Link to='/create/video'><img style={style} src={video} alt={video} /></Link>
         <div className='text-center'>
           <p>Видео карти</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/create/ssd'><img src={ssd} alt={ssd} /></Link>
+        <Link to='/create/ssd'><img style={style} src={ssd} alt={ssd} /></Link>
         <div className='text-center'>
           <p>Дискове</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/create/desktop'><img style={{ width: '300px' }} src={desktop} alt={desktop} /></Link>
+        <Link to='/create/desktop'><img style={style} src={desktop} alt={desktop} /></Link>
         <div className='text-center'>
           <p>Настолни компютри</p>
         </div>
       </div>
 
       <div className='createMenu'>
-        <Link to='/create/laptop'><img style={{ width: '300px' }} src={laptop} alt={laptop} /></Link>
+        <Link to='/create/laptop'><img style={style} src={laptop} alt={laptop} /></Link>
         <div className='text-center'>
           <p>Лаптопи</p>
         </div>
       </div>
     </React.Fragment>
   )
+}
+
+const style = {
+  width: '240px'
 }
 
 export default CreatePage

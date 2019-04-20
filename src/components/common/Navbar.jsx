@@ -40,11 +40,11 @@ function Navbar (props) {
           <li className='nav-item'>
             <NavLink className='nav-link' to='/contact'>Контакти</NavLink>
           </li>
-          {isAuth() && <span className='navbar-text float: right' >
+          {isAuth() && <span className='navbar-text float: right mr-2' >
             Здравей {window.sessionStorage.getItem('username')}
           </span>}
           {isAuth() && <span className='navbar-text float: right' >
-            {/* Cart: {props.cart.length} items | Total: {getTotal(props.cart)} */}
+            Количка: {props.cart.length} продукти | Цена: {getTotal(props.cart)}
           </span>}
         </ul>
       </div>
@@ -52,14 +52,13 @@ function Navbar (props) {
   )
 }
 
-// function getTotal (items) {
-//   let sum = 0
-//   console.log(items)
-//   for (let p in items) {
-//     sum += Number(items[p].product.price) * Number(items[p].quantity)
-//   }
-//   return sum
-// }
+function getTotal (items) {
+  let sum = 0
+  for (let p in items) {
+    sum += Number(items[p].product.price)
+  }
+  return sum
+}
 
 function NavbarConsumer (props) {
   return (
