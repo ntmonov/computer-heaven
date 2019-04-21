@@ -17,10 +17,10 @@ class CartPage extends React.Component {
         <table className='table table-bordered table-hover table-primary'>
           <thead>
             <tr>
-              <th scope='col'>Img</th>
-              <th scope='col'>Name/Description</th>
-              <th scope='col'>Price</th>
-              <th scope='col'>Remove</th>
+              <th scope='col'>Продукт</th>
+              <th scope='col'>Име/Описание</th>
+              <th scope='col'>Цена(лв)</th>
+              <th scope='col'>Изтрий</th>
             </tr>
           </thead>
           <tbody>
@@ -29,15 +29,15 @@ class CartPage extends React.Component {
                 <td><Link to={`/details/${item.type}/${item.product._id}`}>
                   <img src={item.product.imageUrl} alt='product' style={{ width: '240px' }} />
                 </Link></td>
-                <td><h2>Name: {item.product.name}</h2>
+                <td><h2>{item.product.name}</h2>
                   <p>{item.product.description}</p></td>
-                <td><h3>Price: {item.product.price}</h3></td>
+                <td><h3>{item.product.price} лв</h3></td>
                 <td><button className='btn btn-danger' onClick={() => this.props.cart.deleteFromCart(item.product._id)}>X</button></td>
               </tr>
             ))}
           </tbody>
         </table>
-        <h3>Total: {this.getTotal.bind(this)()}</h3>
+        <h3>Всичко: {this.getTotal.bind(this)()} лв</h3>
       </React.Fragment>
     )
   }

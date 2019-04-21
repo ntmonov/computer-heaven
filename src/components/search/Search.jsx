@@ -58,8 +58,7 @@ class Search extends React.Component {
     const { type, searchName, minPrice, maxPrice } = this.state.search
     try {
       this.setState({ isLoading: true })
-      products = await getSearchCatalog(type, searchName, minPrice, maxPrice)
-      console.log(products)
+      products = await getSearchCatalog(type, searchName, Number(minPrice), Number(maxPrice))
       this.setState({ products })
       this.setState({ isLoading: false })
     } catch (error) {
