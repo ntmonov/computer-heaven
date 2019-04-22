@@ -1,6 +1,7 @@
 import React from 'react'
 import { getDetails, updateProduct } from '../../utils/catalogRequests'
 import toastr from 'toastr'
+import validate from '../../utils/formValidator.js'
 
 import CreateCPUForm from '../forms/CreateCPUForm'
 
@@ -8,7 +9,8 @@ class EditCPU extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      cpu: {}
+      cpu: {},
+      errors: {}
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -24,6 +26,13 @@ class EditCPU extends React.Component {
 
   async onSubmit (event) {
     event.preventDefault()
+
+    const { isValid, errors } = validate(this.state.cpu)
+    if (!isValid) {
+      this.setState({ errors })
+      return
+    }
+
     if (this.state.cpu.imageUrl.length === 0) {
       let cpu = this.state.cpu
       cpu.imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
@@ -55,7 +64,7 @@ class EditCPU extends React.Component {
 
   render () {
     return (
-      <CreateCPUForm onChange={this.onChange} cpu={this.state.cpu} onSubmit={this.onSubmit} submitMsg='Редактирай' />
+      <CreateCPUForm onChange={this.onChange} cpu={this.state.cpu} errors={this.state.errors} onSubmit={this.onSubmit} submitMsg='Редактирай' />
     )
   }
 }

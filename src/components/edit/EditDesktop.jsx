@@ -2,12 +2,14 @@ import React from 'react'
 import { getDetails, updateProduct } from '../../utils/catalogRequests'
 import toastr from 'toastr'
 import CreateDesktopForm from '../forms/CreateDesktopForm'
+import validate from '../../utils/formValidator.js'
 
 class EditDesktop extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      desktop: {}
+      desktop: {},
+      errors: {}
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -23,6 +25,13 @@ class EditDesktop extends React.Component {
 
   async onSubmit (event) {
     event.preventDefault()
+
+    const { isValid, errors } = validate(this.state.desktop)
+
+    if (!isValid) {
+      this.setState({ errors })
+      return
+    }
     if (this.state.desktop.imageUrl.length === 0) {
       let desktop = this.state.desktop
       desktop.imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
@@ -54,7 +63,7 @@ class EditDesktop extends React.Component {
 
   render () {
     return (
-      <CreateDesktopForm onChange={this.onChange} desktop={this.state.desktop} onSubmit={this.onSubmit} submitMsg='Редактирай' />
+      <CreateDesktopForm onChange={this.onChange} desktop={this.state.desktop} onSubmit={this.onSubmit} errors={this.state.errors} submitMsg='Редактирай' />
     )
   }
 }

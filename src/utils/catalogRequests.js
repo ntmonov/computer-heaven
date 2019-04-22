@@ -7,7 +7,7 @@ function create (type, data) {
 }
 
 function getCatalog (type, sortMethod, page) {
-  const sort = (sortMethod === 'ASC') ? '1' : '-1'
+  const sort = (sortMethod === 'ASC') ? 1 : -1
   const skip = (page - 1) * 3
   return get(`https://baas.kinvey.com/appdata/${APP_KEY}/${type}?sort={"price":${sort}}&limit=3&skip=${skip}`, 'kinvey')
 }

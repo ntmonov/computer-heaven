@@ -12,11 +12,11 @@ class CreateMainboard extends React.Component {
       ssd: {
         name: '',
         capacity: '',
-        interface: 'M.2 SATA 6Gb/s',
+        interface: 'SATA 6Gb/s',
         description: '',
         imageUrl: '',
         price: 0,
-        factor: 'M2'
+        factor: '2.5'
       },
       isLoading: false,
       errors: {}

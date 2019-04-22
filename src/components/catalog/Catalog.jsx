@@ -15,7 +15,7 @@ class Catalog extends React.Component {
       products: [],
       type: '',
       isLoading: false,
-      sortMethod: window.sessionStorage.getItem('sortMethod') || 'ASC',
+      sortMethod: window.localStorage.getItem('sortMethod') || 'ASC',
       count: 0
     }
     this.delProduct = this.delProduct.bind(this)
@@ -36,7 +36,7 @@ class Catalog extends React.Component {
     this.setState({ sortMethod }, () => {
       this.getData()
     })
-    window.sessionStorage.setItem('sortMethod', sortMethod)
+    window.localStorage.setItem('sortMethod', sortMethod)
   }
 
   async delProduct (productId) {
@@ -86,7 +86,7 @@ class Catalog extends React.Component {
       <React.Fragment>
         <h1>Catalog</h1>
         <div className='text-center'>
-          <Select options={['-', 'ASC', 'DESC']} label='Сортирай по цена' multi={false} onChange={this.sortProducts} />
+          <Select options={['-', 'ASC', 'DESC']} label='Сортирай по цена' multi={false} onChange={this.sortProducts} selected={this.state.sortMethod} />
           {this.state.isLoading && <div className='centerDiv'><Spinner className='text-center' size={80} spinnerColor={'#333'} spinnerWidth={2} visible /></div>}
           {this.state.products.map(prod => (
             <CatalogItem key={prod._id} delProduct={this.delProduct} prod={prod} type={this.state.type} addToCart={() => { this.addToCart(prod._id) }} />

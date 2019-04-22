@@ -1,14 +1,15 @@
 import React from 'react'
 import { getDetails, updateProduct } from '../../utils/catalogRequests'
 import toastr from 'toastr'
-
+import validate from '../../utils/formValidator.js'
 import CreateMainboardForm from '../forms/CreateMainboardForm'
 
 class EditMainboard extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      mainboard: {}
+      mainboard: {},
+      errors: {}
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -28,6 +29,12 @@ class EditMainboard extends React.Component {
       let mainboard = this.state.mainboard
       mainboard.imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
       this.setState({ mainboard })
+    }
+    const { isValid, errors } = validate(this.state.mainboard)
+
+    if (!isValid) {
+      this.setState({ errors })
+      return
     }
     let item
     let productId = this.props.match.params.productId
@@ -55,7 +62,7 @@ class EditMainboard extends React.Component {
 
   render () {
     return (
-      <CreateMainboardForm onChange={this.onChange} mb={this.state.mainboard} onSubmit={this.onSubmit} submitMsg='Редактирай' />
+      <CreateMainboardForm onChange={this.onChange} mb={this.state.mainboard} errors={this.state.errors} onSubmit={this.onSubmit} submitMsg='Редактирай' />
     )
   }
 }

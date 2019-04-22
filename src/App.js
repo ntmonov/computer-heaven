@@ -34,7 +34,6 @@ class App extends Component {
 
   async deleteFromCart (productId) {
     let cartItem = await getCartProduct(productId)
-    console.log(cartItem)
     await deleteFromCart(cartItem[0]._id)
     this.getInitialCart()
   }

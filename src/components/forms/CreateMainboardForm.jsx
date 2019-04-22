@@ -31,7 +31,7 @@ function CreateMainboardForm (props) {
         name='socket'
         label='Socket'
         options={['1151', 'AM4', '1150']}
-        onChaange={props.onChange}
+        onChange={props.onChange}
         value={props.mb.socket}
       />
 

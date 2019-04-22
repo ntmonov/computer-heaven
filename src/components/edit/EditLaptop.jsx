@@ -2,12 +2,14 @@ import React from 'react'
 import { getDetails, updateProduct } from '../../utils/catalogRequests'
 import toastr from 'toastr'
 import CreateLaptopForm from '../forms/CreateLaptopForm'
+import validate from '../../utils/formValidator.js'
 
 class EditLaptop extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      laptop: {}
+      laptop: {},
+      errors: {}
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -23,6 +25,13 @@ class EditLaptop extends React.Component {
 
   async onSubmit (event) {
     event.preventDefault()
+
+    const { isValid, errors } = validate(this.state.laptop)
+
+    if (!isValid) {
+      this.setState({ errors })
+      return
+    }
     if (this.state.laptop.imageUrl.length === 0) {
       let laptop = this.state.laptop
       laptop.imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
@@ -54,7 +63,7 @@ class EditLaptop extends React.Component {
 
   render () {
     return (
-      <CreateLaptopForm onChange={this.onChange} laptop={this.state.laptop} onSubmit={this.onSubmit} submitMsg='Редактирай' />
+      <CreateLaptopForm onChange={this.onChange} laptop={this.state.laptop} onSubmit={this.onSubmit} errors={this.state.errors} submitMsg='Редактирай' />
     )
   }
 }

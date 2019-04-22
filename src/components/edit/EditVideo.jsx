@@ -1,5 +1,6 @@
 import React from 'react'
 import { getDetails, updateProduct } from '../../utils/catalogRequests'
+import validate from '../../utils/formValidator.js'
 import toastr from 'toastr'
 
 import CreateVideoForm from '../forms/CreateVideoForm'
@@ -8,7 +9,8 @@ class EditVideo extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      video: {}
+      video: {},
+      errors: {}
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -24,6 +26,14 @@ class EditVideo extends React.Component {
 
   async onSubmit (event) {
     event.preventDefault()
+
+    const { isValid, errors } = validate(this.state.video)
+
+    if (!isValid) {
+      this.setState({ errors })
+      return
+    }
+
     if (this.state.video.imageUrl.length === 0) {
       let video = this.state.video
       video.imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
@@ -55,7 +65,7 @@ class EditVideo extends React.Component {
 
   render () {
     return (
-      <CreateVideoForm onChange={this.onChange} video={this.state.video} onSubmit={this.onSubmit} submitMsg='Редактирай' />
+      <CreateVideoForm onChange={this.onChange} video={this.state.video} onSubmit={this.onSubmit} errors={this.state.errors} submitMsg='Редактирай' />
     )
   }
 }

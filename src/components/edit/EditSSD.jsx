@@ -1,5 +1,6 @@
 import React from 'react'
 import { getDetails, updateProduct } from '../../utils/catalogRequests'
+import validate from '../../utils/formValidator.js'
 import toastr from 'toastr'
 
 import CreateSSDForm from '../forms/CreateSSDForm'
@@ -8,7 +9,8 @@ class EditSSD extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      ssd: {}
+      ssd: {},
+      errors: {}
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -24,6 +26,13 @@ class EditSSD extends React.Component {
 
   async onSubmit (event) {
     event.preventDefault()
+
+    const { isValid, errors } = validate(this.state.ssd)
+
+    if (!isValid) {
+      this.setState({ errors })
+      return
+    }
     if (this.state.ssd.imageUrl.length === 0) {
       let ssd = this.state.ssd
       ssd.imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
@@ -55,7 +64,7 @@ class EditSSD extends React.Component {
 
   render () {
     return (
-      <CreateSSDForm onChange={this.onChange} ssd={this.state.ssd} onSubmit={this.onSubmit} submitMsg='Редактирай' />
+      <CreateSSDForm onChange={this.onChange} ssd={this.state.ssd} onSubmit={this.onSubmit} errors={this.state.errors} submitMsg='Редактирай' />
     )
   }
 }

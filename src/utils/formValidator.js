@@ -1,12 +1,12 @@
 export default function validate (product) {
   let isValid = true
   let errors = {}
-  if (!/^[A-Za-z0-9]{3,}$/.test(product.name)) {
+  if (!/^[A-Za-z0-9]{3,}/.test(product.name)) {
     isValid = false
     errors['name'] = 'Name must be at laest 3 letters or digits'
   }
 
-  if (!/^[A-Za-z0-9]{3,}$/.test(product.description)) {
+  if (!/^[A-Za-z0-9]{3,}/.test(product.description)) {
     isValid = false
     errors['description'] = 'Description must be at laest 3 letters or digits'
   }
@@ -26,22 +26,22 @@ export default function validate (product) {
     errors['price'] = 'Price must be a positive number'
   }
 
-  if (product.hasOwnProperty('cpu') && !/^[A-Za-z0-9]{3,}$/.test(product.cpu)) {
+  if (product.hasOwnProperty('cpu') && !/^[A-Za-z0-9]{3,}/.test(product.cpu)) {
     isValid = false
     errors['cpu'] = 'CPU must be at laest 3 letters or digits'
   }
 
-  if (product.hasOwnProperty('video') && !/^[A-Za-z0-9]{3,}$/.test(product.video)) {
+  if (product.hasOwnProperty('video') && !/^[A-Za-z0-9]{3,}/.test(product.video)) {
     isValid = false
     errors['video'] = 'Video card must be at laest 3 letters or digits'
   }
 
-  if (product.hasOwnProperty('resolution') && !/^[A-Za-z0-9]{3,}$/.test(product.resolution)) {
+  if (product.hasOwnProperty('resolution') && !/^[A-Za-z0-9]{3,}/.test(product.resolution)) {
     isValid = false
     errors['resolution'] = 'Resolution must be at laest 3 letters or digits'
   }
 
-  if (product.hasOwnProperty('chipset') && !/^[A-Za-z0-9]{3,}$/.test(product.chipset)) {
+  if (product.hasOwnProperty('chipset') && !/^[A-Za-z0-9]{3,}/.test(product.chipset)) {
     isValid = false
     errors['chipset'] = 'Chipset must be at laest 3 letters or digits'
   }
